@@ -1,4 +1,4 @@
-package bonn.org.studentbay;
+package bonn.org.studentbay.gui.ui;
 
 import javax.servlet.annotation.WebServlet;
 
