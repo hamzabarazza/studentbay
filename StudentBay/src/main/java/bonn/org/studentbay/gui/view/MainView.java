@@ -17,6 +17,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.UI;
 
 /**
  *
@@ -49,8 +50,26 @@ public class MainView extends VerticalLayout implements View{
         
         //Wenn eingeloggt dann Benutzername, sonst Login-Link--------------------------
         Label user = new Label("User1234");
+       
+        
+        // Button zur RegistrationView
+        Button mainToRegView = new Button("Registrieren");
+        mainToRegView.addClickListener((Button.ClickEvent e)->{
+            UI.getCurrent().getNavigator().navigateTo("registration");
+        });
+        
+        
+        // Button zur LoginView
+        Button mainToLogin = new Button("Login");
+        mainToLogin.addClickListener((Button.ClickEvent e)->{
+            UI.getCurrent().getNavigator().navigateTo("login");
+        });
+        
+        // Topleiste Inhalt + Alignment
         topLeiste.setWidth("100%");
-        topLeiste.addComponents(begruessung, suchFeld, user);
+        topLeiste.addComponents(begruessung, suchFeld, mainToRegView, mainToLogin, user);
+        topLeiste.setComponentAlignment(mainToRegView, Alignment.TOP_RIGHT);
+        topLeiste.setComponentAlignment(mainToLogin, Alignment.TOP_RIGHT);
         topLeiste.setComponentAlignment(user, Alignment.TOP_RIGHT);
         topLeiste.setComponentAlignment(begruessung, Alignment.TOP_LEFT);
         topLeiste.setComponentAlignment(suchFeld, Alignment.TOP_CENTER);

@@ -55,4 +55,9 @@ $v-component-group-spacing: 6px;
   @include valo;
 
   // Insert your own theme rules here
+  
+  // .center , Alignment von Content innerhalb eines Labels
+  .center {
+    text-align: center;
+}
 }
