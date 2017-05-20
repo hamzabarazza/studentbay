@@ -951,7 +951,7 @@
 		opacity: 0;
 	}
 	}
-
+       
 /**
  * @group valo-menu
  */
@@ -1234,6 +1234,12 @@ div.v-layout.v-horizontal.v-widget {
 	height: 1px;
 	background: red;
 	z-index: 2;
+}
+
+/* TEXT Content zentrieren */
+
+.center {
+    text-align: center;
 }
 
 .v-calendar-event-resizetop, .v-calendar-event-resizebottom {

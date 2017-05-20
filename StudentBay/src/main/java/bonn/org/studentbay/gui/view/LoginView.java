@@ -5,15 +5,19 @@
  */
 package bonn.org.studentbay.gui.view;
 
+import bonn.org.studentbay.process.control.LoginControl;
+import bonn.org.studentbay.process.control.exceptions.NoSuchUserOrPassword;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -27,12 +31,12 @@ public void setUp(){
     username.setCaption("Benutzername");
     
     
-    PasswordField password = new PasswordField();
-    password.setCaption("Passwort");
+    PasswordField passwordField = new PasswordField();
+    passwordField.setCaption("Passwort");
     
     
     VerticalLayout loginscreen = new VerticalLayout();
-    loginscreen.addComponents(username, password);
+    loginscreen.addComponents(username, passwordField);
     
     Panel login = new Panel("Bitte Loggen Sie sich hier ein:");
     this.addComponent(login);
@@ -44,10 +48,26 @@ public void setUp(){
     
     loginscreen.addComponent(loginButton);
     
+    loginButton.addClickListener(new Button.ClickListener(){
+        
+        @Override
+        public void buttonClick(Button.ClickEvent event){
+           
+            String login = username.getValue();
+            String password = passwordField.getValue();
+            try {
+                
+                LoginControl.checkAuthenticaton(login, password);
             
-}
-    
-    
+            }catch (NoSuchUserOrPassword ex){
+                // UI.getCurrent().getNavigator().navigateTo("login");
+                Notification.show("Fehler","Login oder Password falsch!", Notification.Type.ERROR_MESSAGE);
+                username.setValue("");
+                passwordField.setValue("");
+        }
+        }       
+    });         
+}    
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
         this.setUp();
