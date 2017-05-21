@@ -5,9 +5,18 @@
  */
 package bonn.org.studentbay.process.control;
 
+import bonn.org.studentbay.model.objects.dao.User;
 import bonn.org.studentbay.process.control.exceptions.NoSuchUserOrPassword;
+import bonn.org.studentbay.services.db.JDBCConnection;
+import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,14 +27,40 @@ public class LoginControl {
     public static void checkAuthenticaton(String login, String password) throws NoSuchUserOrPassword{
         
         // Datenbank-Zugriff
+        ResultSet set = null;
         
+        try {
+            Statement statement = JDBCConnection.getInstance().getStatement();
+            // SQL-Befehl
+            set = statement.executeQuery("SELECT * FROM studentbay.User WHERE Username = \'" + login + "\'"
+                                        + " AND studentbay.User.Password = \'" + password + "\'");
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        // Benutzer ist vorhanden:
-        // UI.getCurrent().getNavigator().navigateTo("main");
+        User user = null;
         
+        try{
         
-        // Fehlerfall
-        throw new NoSuchUserOrPassword();
+        if( set.next()){
+            user = new User();
+            user.setUsername(set.getString(1));
+            user.setVorname(set.getString(3));
+           
+        } else {
+            // Fehlerfall
+            throw new NoSuchUserOrPassword();
+        }
+        } catch (SQLException ex){
+            Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
+        
+        VaadinSession session = UI.getCurrent().getSession();
+        session.setAttribute(Roles.CURRENT_USER, user);
+        
+        UI.getCurrent().getNavigator().navigateTo("main");
         
     }
 }

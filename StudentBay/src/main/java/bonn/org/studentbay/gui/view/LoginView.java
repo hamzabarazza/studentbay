@@ -45,8 +45,8 @@ public void setUp(){
     login.setContent(loginscreen);
     login.setSizeUndefined();
     Button loginButton = new Button("Login", FontAwesome.ARROW_RIGHT);
-    
-    loginscreen.addComponent(loginButton);
+    this.addComponent(loginButton);
+    this.setComponentAlignment(loginButton, Alignment.MIDDLE_CENTER);
     
     loginButton.addClickListener(new Button.ClickListener(){
         

@@ -23,6 +23,10 @@ public class User implements java.io.Serializable{
     private String email;
     private String passwort;
     
+    public User(){
+        
+    }
+    
     public User(String username ,String vorname, String nachname, Date geburtstag, String email, String passwort){
         this.userID = NEXTID;
         ++NEXTID;
