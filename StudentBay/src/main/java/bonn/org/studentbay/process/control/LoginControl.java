@@ -48,7 +48,7 @@ public class LoginControl {
         
           if( set.next()){
             user = new User();
-            user.setUsername(set.getString(1));
+            user.setUsername(set.getString(10));
             user.setVorname(set.getString(3));
            
         } else {

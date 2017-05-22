@@ -6,7 +6,9 @@
 package bonn.org.studentbay.gui.view;
 
 import bonn.org.studentbay.gui.ui.MyUI;
+import bonn.org.studentbay.model.objects.dao.User;
 import bonn.org.studentbay.process.control.LoginControl;
+import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ClassResource;
@@ -15,6 +17,7 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinService;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
@@ -53,9 +56,9 @@ public class MainView extends VerticalLayout implements View{
                                 "/META-INF/logo.png"));
 
         // Show the image in the application
-        Image begruessung = new Image("", resource);
+        Image begruessung = new Image("",resource);
         begruessung.setWidth(20, UNITS_EM);
-        
+        begruessung.setStyleName("logo");
         
         
         
@@ -68,11 +71,27 @@ public class MainView extends VerticalLayout implements View{
         });
         suchFeld.addComponents(suchEingabe, suche);
         
-       
-        //Wenn eingeloggt dann Benutzername, sonst Login-Link--------------------------
-        Label user = new Label("User1234");
-       
         
+        
+      //Wenn eingeloggt dann Benutzername, sonst Login-Link--------------------------
+
+       User current_user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);
+          String username;
+          try {
+            username = current_user.getUsername();
+        } catch (NullPointerException e) {
+            username = "";
+        }
+      
+       
+      Label user = new Label("Herzlich Willkommen " + username + "!");
+      
+    
+       
+        HorizontalLayout userLogReg = new HorizontalLayout();
+
+
+        if(username==""){
         // Button zur RegistrationView
         Button mainToRegView = new Button("Registrieren");
         mainToRegView.addClickListener((Button.ClickEvent e)->{
@@ -86,8 +105,13 @@ public class MainView extends VerticalLayout implements View{
             UI.getCurrent().getNavigator().navigateTo("login");
         });
         
-        HorizontalLayout userLogReg = new HorizontalLayout();
+        
         userLogReg.addComponents(mainToLogin, mainToRegView, user);
+        }else{
+            
+        userLogReg.addComponent( user);
+        }
+        
         
         // Topleiste Inhalt + Alignment
         topLeiste.setWidth("100%");

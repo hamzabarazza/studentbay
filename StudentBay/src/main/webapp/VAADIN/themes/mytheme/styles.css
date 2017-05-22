@@ -13180,3 +13180,7 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .center {
 	text-align: center;
 }
+
+.mytheme .logo {
+	margin-top: -53px;
+}
