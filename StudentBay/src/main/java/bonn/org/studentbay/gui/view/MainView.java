@@ -39,6 +39,8 @@ public class MainView extends VerticalLayout implements View{
     public void setUp() {
         //Äußester Rahmen----------------------------------------------------
         
+        
+        Boolean userLoggedIn = false;
         setWidth("100%");
         
         //Top Leiste----------------------------------------------------
@@ -74,24 +76,24 @@ public class MainView extends VerticalLayout implements View{
         
         
       //Wenn eingeloggt dann Benutzername, sonst Login-Link--------------------------
-
+      
        User current_user = (User) UI.getCurrent().getSession().getAttribute(Roles.CURRENT_USER);
           String username;
           try {
             username = current_user.getUsername();
+            userLoggedIn = true;
         } catch (NullPointerException e) {
             username = "";
         }
       
        
-      Label user = new Label("Herzlich Willkommen " + username + "!");
       
     
        
         HorizontalLayout userLogReg = new HorizontalLayout();
 
 
-        if(username==""){
+        if(!userLoggedIn){
         // Button zur RegistrationView
         Button mainToRegView = new Button("Registrieren");
         mainToRegView.addClickListener((Button.ClickEvent e)->{
@@ -106,9 +108,10 @@ public class MainView extends VerticalLayout implements View{
         });
         
         
-        userLogReg.addComponents(mainToLogin, mainToRegView, user);
+        userLogReg.addComponents(mainToLogin, mainToRegView);
         }else{
-            
+        Label user = new Label("Herzlich Willkommen " + username + "!");
+      
         userLogReg.addComponent( user);
         }
         
@@ -139,17 +142,19 @@ public class MainView extends VerticalLayout implements View{
         mitte.addComponent(newsfeed);
         
         
+        
         //Inhalt des Newsfeeds
         FormLayout content = new FormLayout();
         content.addStyleName("mypanelcontent");
         //Favoriten-------------------------------------------------------
+        if(userLoggedIn){
         content.addComponent(new Label("Favoriten:"));
         content.addComponent(new Label("Shop 1"));
         content.addComponent(new Label("Shop 2"));
         content.addComponent(new Label("Shop 3"));
         content.addComponent(new Label("Shop 4"));
         content.addComponent(new Label("-----------------"));
-        
+        }
         
         //Wichtige Informationen----------------------------------------------------
         Label informationen = new Label("Wichtige Informationen Rund um das Shoppingsystem. Hier finden Sie unter anderem auch sonderaktionen oder Rabattcodes.");
