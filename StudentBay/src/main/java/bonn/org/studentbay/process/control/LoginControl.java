@@ -23,6 +23,7 @@ import java.util.logging.Logger;
  * @author jens
  */
 public class LoginControl {
+
     
     public static void checkAuthenticaton(String login, String password) throws NoSuchUserOrPassword{
         
@@ -32,8 +33,9 @@ public class LoginControl {
         ResultSet set = null;
         try {
             // SQL-Befehl
-            set = statement.executeQuery("SELECT * FROM studentbay.user WHERE studentbay.User.Username = \'" + login + "\'"
-                                        + " AND studentbay.User.Password = \'" + password + "\'");
+            set = statement.executeQuery("SELECT * FROM studentbay.nutzer WHERE studentbay.nutzer.username = \'" + login + "\'"
+                                        + " AND studentbay.nutzer.password = \'" + password + "\'");
+            
         } catch (SQLException ex) {
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
@@ -44,7 +46,7 @@ public class LoginControl {
         
         try{
         
-        if( set.next()){
+          if( set.next()){
             user = new User();
             user.setUsername(set.getString(1));
             user.setVorname(set.getString(3));

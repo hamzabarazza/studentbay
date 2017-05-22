@@ -6,6 +6,7 @@
 package bonn.org.studentbay.gui.view;
 
 import bonn.org.studentbay.gui.ui.MyUI;
+import bonn.org.studentbay.process.control.LoginControl;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ClassResource;
@@ -67,7 +68,7 @@ public class MainView extends VerticalLayout implements View{
         });
         suchFeld.addComponents(suchEingabe, suche);
         
-        
+       
         //Wenn eingeloggt dann Benutzername, sonst Login-Link--------------------------
         Label user = new Label("User1234");
        
@@ -100,7 +101,7 @@ public class MainView extends VerticalLayout implements View{
         
         //Navigation----------------------------------------------------
         HorizontalLayout navigation = new HorizontalLayout();
-        Label platzhalter = new Label("----Hier kommt die Naviogationsleiste hin----");
+        Label platzhalter = new Label("");
         navigation.setWidth("100%");
         navigation.addComponent(platzhalter);
         navigation.setComponentAlignment(platzhalter, Alignment.MIDDLE_CENTER);
