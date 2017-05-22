@@ -45,8 +45,8 @@ public void setUp(){
     login.setContent(loginscreen);
     login.setSizeUndefined();
     Button loginButton = new Button("Login", FontAwesome.ARROW_RIGHT);
-    this.addComponent(loginButton);
-    this.setComponentAlignment(loginButton, Alignment.MIDDLE_CENTER);
+    addComponent(loginButton);
+    setComponentAlignment(loginButton, Alignment.MIDDLE_CENTER);
     
     loginButton.addClickListener(new Button.ClickListener(){
         
@@ -64,8 +64,9 @@ public void setUp(){
                 Notification.show("Fehler","Login oder Password falsch!", Notification.Type.ERROR_MESSAGE);
                 username.setValue("");
                 passwordField.setValue("");
-        }
-        }       
+        
+            }
+        }     
     });         
 }    
     @Override

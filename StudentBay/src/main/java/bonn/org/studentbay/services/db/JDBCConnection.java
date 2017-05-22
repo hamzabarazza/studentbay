@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class JDBCConnection {
     
     private static JDBCConnection connection = null;
-    private String url = "jdbc:postesql://dumbo.inf.fh-bonn-rhein-sieg.de/atheis2s";
+    private String url = "jdbc:postgresql://dumbo.inf.fh-bonn-rhein-sieg.de/atheis2s";
     private String login = "atheis2s";
     private String password = "atheis2s";
     private Connection conn;
@@ -61,7 +61,7 @@ public class JDBCConnection {
        
     public Statement getStatement(){
         try {
-            if( this.conn.isClosed()){
+            if( conn.isClosed()){
                 this.openConnection();
             }
             return this.conn.createStatement();

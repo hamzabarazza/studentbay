@@ -27,15 +27,17 @@ public class LoginControl {
     public static void checkAuthenticaton(String login, String password) throws NoSuchUserOrPassword{
         
         // Datenbank-Zugriff
-        ResultSet set = null;
         
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
         try {
-            Statement statement = JDBCConnection.getInstance().getStatement();
             // SQL-Befehl
-            set = statement.executeQuery("SELECT * FROM studentbay.User WHERE Username = \'" + login + "\'"
+            set = statement.executeQuery("SELECT * FROM studentbay.user WHERE studentbay.User.Username = \'" + login + "\'"
                                         + " AND studentbay.User.Password = \'" + password + "\'");
         } catch (SQLException ex) {
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
         }
         
         User user = null;

@@ -8,16 +8,23 @@ package bonn.org.studentbay.gui.view;
 import bonn.org.studentbay.gui.ui.MyUI;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.ClassResource;
+import com.vaadin.server.FileResource;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Resource;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.UI;
+import java.io.File;
 
 /**
  *
@@ -34,8 +41,21 @@ public class MainView extends VerticalLayout implements View{
         HorizontalLayout topLeiste = new HorizontalLayout();
         
         
-        //Begrüßungstext----------------------------------------------------
-        Label begruessung = new Label("[LOGO] Herzlich Willkommen! ");
+       //Logo----------------------------------------------------
+    
+         // Find the application directory
+        String basepath = VaadinService.getCurrent()
+                          .getBaseDirectory().getAbsolutePath();
+
+        // Image as a file resource
+        FileResource resource = new FileResource(new File(basepath +
+                                "/META-INF/logo.png"));
+
+        // Show the image in the application
+        Image begruessung = new Image("", resource);
+        begruessung.setWidth(20, UNITS_EM);
+        
+        
         
         
         //Layout für die Suche---------------------------------------
@@ -65,12 +85,15 @@ public class MainView extends VerticalLayout implements View{
             UI.getCurrent().getNavigator().navigateTo("login");
         });
         
+        HorizontalLayout userLogReg = new HorizontalLayout();
+        userLogReg.addComponents(mainToLogin, mainToRegView, user);
+        
         // Topleiste Inhalt + Alignment
         topLeiste.setWidth("100%");
-        topLeiste.addComponents(begruessung, suchFeld, mainToRegView, mainToLogin, user);
-        topLeiste.setComponentAlignment(mainToRegView, Alignment.TOP_RIGHT);
-        topLeiste.setComponentAlignment(mainToLogin, Alignment.TOP_RIGHT);
-        topLeiste.setComponentAlignment(user, Alignment.TOP_RIGHT);
+        topLeiste.addComponents(begruessung, suchFeld, userLogReg);
+        topLeiste.setComponentAlignment(userLogReg, Alignment.TOP_RIGHT);
+        //topLeiste.setComponentAlignment(mainToLogin, Alignment.TOP_RIGHT);
+        //topLeiste.setComponentAlignment(user, Alignment.TOP_RIGHT);
         topLeiste.setComponentAlignment(begruessung, Alignment.TOP_LEFT);
         topLeiste.setComponentAlignment(suchFeld, Alignment.TOP_CENTER);
         
