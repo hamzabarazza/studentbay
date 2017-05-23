@@ -85,10 +85,6 @@ public class MainView extends VerticalLayout implements View{
         } catch (NullPointerException e) {
             username = "";
         }
-      
-       
-      
-    
        
         HorizontalLayout userLogReg = new HorizontalLayout();
 
