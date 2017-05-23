@@ -36,6 +36,9 @@ public class RegistrationControl{
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
         }
+        finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
         
     }
     
