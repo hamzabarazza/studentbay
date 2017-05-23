@@ -7,6 +7,7 @@ package bonn.org.studentbay.process.control;
 
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
 import bonn.org.studentbay.services.db.JDBCConnection;
+import com.vaadin.ui.UI;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,18 +20,25 @@ import java.util.logging.Logger;
  * @author jens
  */
 public class RegistrationControl{
-    
+    static private  int NEXTID = 1000;
+     static private int userid;
     public static void registerUser(String username, String vorname, String nachname, LocalDate geburtstag, String email, String password) throws RegisterFail{
-        
+         
+           
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;
         try {
-            // SQL-Befehl
-            set = statement.executeQuery("INSERT INTO studentbay.nutzer (userid,vorname,nachname,email,password,ort,plz,straße,hausnr,username,geburtsdatum,fachbereichid,shopid) "
-                    + "VALUES (999," + "\'" + vorname + "\', " + "\'" + nachname + "\', " + "\'" + email + "\', " + "\'" + password + "\', "
-                    + "\'" + "Musterstadt" + "\', " + "\'" + "76453" + "\', " + "\'" + "Musterstraße" + "\', " + "\'" + "2" + "\', "
-                    + "\'" + username + "\', " + "\'" + geburtstag + "\', " + "\'" + "2" + "\', " + "\'" + "0" + "\', ");
-            
+            userid = NEXTID;
+            NEXTID++;
+/*
+            set = statement.executeQuery("INSERT INTO studentbay.nutzer (userid,username,vorname,nachname,email,password,geburtsdatum) VALUES (\'" + userid + "\',\'" + username + "\', \'" + vorname + "\',\'" 
+                    + nachname + "\',\'" + email + "\',\'" + password + "\', \'null\')");
+            */
+
+  set = statement.executeQuery("INSERT INTO studentbay.nutzer (userid,username,vorname,nachname,email,password,geburtsdatum) VALUES ('234','edfregr', 'sdsaf','sadasdasd','sdas@gmx.de','1234567','2004-05-20')");
+           
+  
+  
         } catch (SQLException ex) {
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
@@ -39,6 +47,11 @@ public class RegistrationControl{
         finally {
             JDBCConnection.getInstance().closeConnection();
         }
+        
+        
+        
+        UI.getCurrent().getNavigator().navigateTo("main");
+        
         
     }
     

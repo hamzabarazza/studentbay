@@ -14,6 +14,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ClassResource;
 import com.vaadin.server.FileResource;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinService;
@@ -24,11 +25,16 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.Window;
 import java.io.File;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -106,9 +112,37 @@ public class MainView extends VerticalLayout implements View{
         
         userLogReg.addComponents(mainToLogin, mainToRegView);
         }else{
-        Label user = new Label("Herzlich Willkommen " + username + "!");
-      
-        userLogReg.addComponent( user);
+        Label user = new Label("Hallo " + username + "!");
+        user.setStyleName("benutzer");
+        
+         // Button zur RegistrationView
+        Button logout = new Button("Logout");
+        logout.addClickListener((Button.ClickEvent e)->{
+           
+            getSession().getSession().invalidate();
+             
+           
+           
+           
+             Page.getCurrent().reload();
+          
+              Notification notif = new Notification(
+                " Auf Wiedersehen!",
+                "Erfolgreich ausgeloggt!",
+                Notification.TYPE_WARNING_MESSAGE);
+
+            // Customize it
+            notif.setDelayMsec(5000);
+
+            // Show it in the page
+            notif.show(Page.getCurrent());
+            
+             
+        });
+        
+        
+        userLogReg.addComponents( user, logout);
+        
         }
         
         
@@ -160,8 +194,9 @@ public class MainView extends VerticalLayout implements View{
         
         
         //Content-----------------------------------------------------------------
-        Panel inhaltPanel = new Panel("");
-        inhaltPanel.setWidth("100%");
+        Panel inhaltPanel = new Panel("Herzlich Willkommen bei StudentBay!");
+        Label text = new Label("Hier erscheint das Suchergebnis!");
+        inhaltPanel.setStyleName("content_block");
         mitte.addComponent(inhaltPanel);
         VerticalLayout inhalt = new VerticalLayout();
         //inhalt.addComponent(new Label("Hier ensteht der Inhalt"));

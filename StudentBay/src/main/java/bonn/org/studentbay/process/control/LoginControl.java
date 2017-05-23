@@ -10,7 +10,9 @@ import bonn.org.studentbay.process.control.exceptions.NoSuchUserOrPassword;
 import bonn.org.studentbay.services.db.JDBCConnection;
 import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
+import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,6 +52,20 @@ public class LoginControl {
             user = new User();
             user.setUsername(set.getString(10));
             user.setVorname(set.getString(3));
+
+           Notification notif = new Notification(
+                "Herzlich Willkommen " + user.getUsername() + "!",
+                "Der Login war erfolgreich",
+                Notification.TYPE_WARNING_MESSAGE);
+
+            // Customize it
+            notif.setDelayMsec(3000);
+
+            // Show it in the page
+            notif.show(Page.getCurrent());
+           
+           
+           
            
         } else {
             // Fehlerfall
@@ -65,6 +81,6 @@ public class LoginControl {
         session.setAttribute(Roles.CURRENT_USER, user);
         
         UI.getCurrent().getNavigator().navigateTo("main");
-        
+       
     }
 }

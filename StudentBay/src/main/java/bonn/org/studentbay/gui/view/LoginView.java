@@ -67,7 +67,23 @@ public void setUp(){
         
             }
         }     
-    });         
+    });  
+    
+    Button cancelButton = new Button("Zurück", FontAwesome.ARROW_LEFT);
+    addComponent(cancelButton);
+    setComponentAlignment(cancelButton, Alignment.MIDDLE_CENTER);
+    
+    cancelButton.addClickListener(new Button.ClickListener(){
+        
+        @Override
+        public void buttonClick(Button.ClickEvent event){
+           
+             UI.getCurrent().getNavigator().navigateTo("main");
+        }  
+
+    });
+    
+    
 }    
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {

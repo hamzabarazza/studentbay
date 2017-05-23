@@ -22,6 +22,7 @@ import static com.vaadin.ui.Notification.show;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -149,8 +150,9 @@ public class RegistrationView extends VerticalLayout implements View {
             // Regestrierungs loschicken an DB
             
              try{
-                  if (agb && password.equals(passworderneut) && password.length() > 6 && matchFound && username.length() > 5 && username.length() < 16)
-                  RegistrationControl.registerUser(username, vorname, nachname, geburtstag, email, password);
+                  if (agb && password.equals(passworderneut) && password.length() > 6 && matchFound && username.length() > 5 && username.length() < 16){
+                 
+                      RegistrationControl.registerUser(username, vorname, nachname, geburtstag, email, password);}
              } catch (RegisterFail ex) {   
                 Logger.getLogger(RegistrationView.class.getName()).log(Level.SEVERE, null, ex);
                 Notification.show("Fehler","Registrierung fehlgeschlagen", Notification.Type.ERROR_MESSAGE);
@@ -164,6 +166,23 @@ public class RegistrationView extends VerticalLayout implements View {
             
         }     
     });
+        
+      Button cancelButton = new Button("Zurück", FontAwesome.ARROW_LEFT);
+    addComponent(cancelButton);
+    setComponentAlignment(cancelButton, Alignment.MIDDLE_CENTER);
+    
+    cancelButton.addClickListener(new Button.ClickListener(){
+        
+        @Override
+        public void buttonClick(Button.ClickEvent event){
+           
+             UI.getCurrent().getNavigator().navigateTo("main");
+        }  
+
+    });  
+        
+        
+        
         
     }
     

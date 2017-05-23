@@ -5,10 +5,14 @@
  */
 package bonn.org.studentbay.process.control;
 
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.UI;
+
 /**
  *
  * @author Lorse
  */
 public class LogoutControl {
     
-}
+    
+    }

@@ -13181,6 +13181,15 @@ div.v-layout.v-horizontal.v-widget {
 	text-align: center;
 }
 
+.mytheme .content_block {
+	min-width: 800px;
+	min-height: 500px;
+}
+
 .mytheme .logo {
 	margin-top: -53px;
+}
+
+.mytheme .benutzer {
+	font-size: 1.5em;
 }
