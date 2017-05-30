@@ -20,23 +20,23 @@ import java.util.logging.Logger;
  * @author jens
  */
 public class RegistrationControl{
-    static private  int NEXTID = 1000;
+    static private  int NEXTID = 100;
      static private int userid;
     public static void registerUser(String username, String vorname, String nachname, LocalDate geburtstag, String email, String password) throws RegisterFail{
          
-           
+         
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;
         try {
             userid = NEXTID;
             NEXTID++;
-/*
-            set = statement.executeQuery("INSERT INTO studentbay.nutzer (userid,username,vorname,nachname,email,password,geburtsdatum) VALUES (\'" + userid + "\',\'" + username + "\', \'" + vorname + "\',\'" 
-                    + nachname + "\',\'" + email + "\',\'" + password + "\', \'null\')");
-            */
 
-  set = statement.executeQuery("INSERT INTO studentbay.nutzer (userid,username,vorname,nachname,email,password,geburtsdatum) VALUES ('234','edfregr', 'sdsaf','sadasdasd','sdas@gmx.de','1234567','2004-05-20')");
-           
+ System.out.println("11111111111111111111111111111111");
+            set = statement.executeQuery("INSERT INTO studentbay.nutzer (userid,username,vorname,nachname,email,password,geburtsdatum) VALUES (\'" + userid + "\',\'" + username + "\', \'" + vorname + "\',\'" 
+                    + nachname + "\',\'" + email + "\',\'" + password + "\', \'"+geburtstag+"\')");
+            
+            //set = statement.executeQuery("insert into studentbay.nutzer (userid,username,vorname,nachname,email,password,geburtsdatum) VALUES ('4','" + username + "', '" + vorname + "','" + nachname + "','" + geburtstag + "','" + email + "','" + password + "')");
+           System.out.println("------------------------");
   
   
         } catch (SQLException ex) {
