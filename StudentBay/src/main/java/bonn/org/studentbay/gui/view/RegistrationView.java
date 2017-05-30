@@ -149,12 +149,9 @@ public class RegistrationView extends VerticalLayout implements View {
             }
             
             // Regestrierungs loschicken an DB
-            System.out.println("TRYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYyy");
-             try{
-                 System.out.println("3333333333333333333333333333333333333333333333333333333");
-                  if (agb && password.equals(passworderneut) && password.length() > 5 && matchFound && username.length() > 5 && username.length() < 16){
-                 System.out.println("222222222222222222222222222222222");
-                      RegistrationControl.registerUser(username, vorname, nachname, geburtstag, email, password);
+            try{
+                if (agb && password.equals(passworderneut) && password.length() > 5 && matchFound && username.length() > 5 && username.length() < 16){
+                    RegistrationControl.registerUser(username, vorname, nachname, geburtstag, email, password);
                   }
              } catch (RegisterFail ex) {   
                 Logger.getLogger(RegistrationView.class.getName()).log(Level.SEVERE, null, ex);

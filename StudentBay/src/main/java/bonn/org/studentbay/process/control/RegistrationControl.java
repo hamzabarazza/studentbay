@@ -31,12 +31,10 @@ public class RegistrationControl{
             userid = NEXTID;
             NEXTID++;
 
- System.out.println("11111111111111111111111111111111");
             set = statement.executeQuery("INSERT INTO studentbay.nutzer (userid,username,vorname,nachname,email,password,geburtsdatum) VALUES (\'" + userid + "\',\'" + username + "\', \'" + vorname + "\',\'" 
                     + nachname + "\',\'" + email + "\',\'" + password + "\', \'"+geburtstag+"\')");
             
-            //set = statement.executeQuery("insert into studentbay.nutzer (userid,username,vorname,nachname,email,password,geburtsdatum) VALUES ('4','" + username + "', '" + vorname + "','" + nachname + "','" + geburtstag + "','" + email + "','" + password + "')");
-           System.out.println("------------------------");
+       //Prepate Statements
   
   
         } catch (SQLException ex) {
