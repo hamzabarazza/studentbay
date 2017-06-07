@@ -6,6 +6,7 @@ import bonn.org.studentbay.gui.*;
 import bonn.org.studentbay.gui.view.LoginView;
 import bonn.org.studentbay.gui.view.MainView;
 import bonn.org.studentbay.gui.view.RegistrationView;
+import com.vaadin.annotations.PreserveOnRefresh;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -26,6 +27,7 @@ import com.vaadin.ui.UI;
  */
 @Theme("mytheme")
 @Title("StudentBay")
+@PreserveOnRefresh
 public class MyUI extends UI {
 
     @Override

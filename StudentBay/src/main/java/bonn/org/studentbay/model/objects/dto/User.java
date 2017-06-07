@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bonn.org.studentbay.model.objects.dao;
+package bonn.org.studentbay.model.objects.dto;
 
 import java.util.Date;
 
 /**
  *
- * @author jens
+ * @author Lorse
  */
-public class User implements java.io.Serializable{
+public class User implements java.io.Serializable {
+    
+    
 
     static private int NEXTID = 1000;
     
@@ -23,8 +25,7 @@ public class User implements java.io.Serializable{
     private String email;
     private String passwort;
     
-    public User(){
-        
+    public User(){ 
     }
     
     public User(String username ,String vorname, String nachname, Date geburtstag, String email, String passwort){
@@ -96,5 +97,7 @@ public class User implements java.io.Serializable{
     public void setPasswort(String neuPasswort){
         this.passwort = neuPasswort;
     }
+    
+    
     
 }

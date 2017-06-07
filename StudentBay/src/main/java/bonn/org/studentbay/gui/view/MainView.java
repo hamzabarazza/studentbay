@@ -6,7 +6,7 @@
 package bonn.org.studentbay.gui.view;
 
 import bonn.org.studentbay.gui.ui.MyUI;
-import bonn.org.studentbay.model.objects.dao.User;
+import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;

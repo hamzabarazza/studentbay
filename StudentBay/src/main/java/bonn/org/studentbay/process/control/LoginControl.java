@@ -5,7 +5,7 @@
  */
 package bonn.org.studentbay.process.control;
 
-import bonn.org.studentbay.model.objects.dao.User;
+import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.exceptions.NoSuchUserOrPassword;
 import bonn.org.studentbay.services.db.JDBCConnection;
 import bonn.org.studentbay.services.util.Roles;
