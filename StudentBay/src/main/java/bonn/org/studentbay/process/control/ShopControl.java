@@ -11,7 +11,6 @@ import com.vaadin.ui.UI;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,12 +18,9 @@ import java.util.logging.Logger;
  *
  * @author jens
  */
-public class RegistrationControl{
+public class ShopControl {
     
-    public RegistrationControl(){  
-    }
-    
-    public static void registerUser(String username, String vorname, String nachname, LocalDate geburtstag, String email, String password) throws RegisterFail{
+    public static void registerShop(String shopname, Boolean vorkasse, Boolean nachnahme, Boolean paypal, Boolean rechnung, Boolean kreditkarte, Boolean lastschrift) throws RegisterFail{
          
          
         Statement statement = JDBCConnection.getInstance().getStatement();
@@ -32,16 +28,15 @@ public class RegistrationControl{
         try {
             
 
-            set = statement.executeQuery("INSERT INTO studentbay.nutzer (userid,username,vorname,nachname,email,password,geburtsdatum) VALUES (\'" + username + "\', \'" + vorname + "\',\'" 
-                    + nachname + "\',\'" + email + "\',\'" + password + "\', \'"+geburtstag+"\')");
+            set = statement.executeQuery("INSERT INTO studentbay.shop (artikelname, beschreibung, kategorie) VALUES (\'" + shopname + "\', \'" + vorkasse + "\',\'" 
+                    + nachnahme + "\', \'" + paypal + "\', \'" + rechnung + "\', \'" + kreditkarte + "\', \'" + lastschrift + "\')");
             
-       //Prepate Statements
   
   
         } catch (SQLException ex) {
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
-            System.out.println("Fehler in der SQL-Anweisung! registerUser");
+            System.out.println("Fehler in der SQL-Anweisung! registerShop");
         }
         finally {
             JDBCConnection.getInstance().closeConnection();

@@ -12,5 +12,8 @@ package bonn.org.studentbay.services.util;
 public class Roles {
     
     public static final String CURRENT_USER = "currentUser";
-    
+    public static final String CURRENT_EMAIL = "email";
+    public static final String CURRENT_VORNAME = "vorname";
+    public static final String CURRENT_NACHNAME = "nachname";
+    public static final String CURRENT_GEBURTSTAG = "geburstag";
 }

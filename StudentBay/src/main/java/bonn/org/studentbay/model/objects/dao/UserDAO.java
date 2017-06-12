@@ -5,10 +5,10 @@
  */
 package bonn.org.studentbay.model.objects.dao;
 
-import bonn.org.studentbay.process.control.exceptions.DatabaseException;
 import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.services.db.JDBCConnection;
+import bonn.org.studentbay.services.util.Roles;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,7 +34,7 @@ public class UserDAO{
         return dao;
     }
     
-    public String getUsernameForUser( User user) throws SQLException{
+    public String getVornameForUser( User user) throws SQLException{
         Statement statement = null;
         
         statement = JDBCConnection.getInstance().getStatement();
@@ -43,7 +43,7 @@ public class UserDAO{
         ResultSet rs = null;
         
         try{
-            rs = statement.executeQuery("SELECT * FROM studentbay.nutzer");
+            rs = statement.executeQuery("SELECT * FROM studentbay.nutzer WHERE studentbay.nutzer.username = \'" + Roles.CURRENT_USER + "\'");
         } catch (SQLException ex){
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,18 +52,16 @@ public class UserDAO{
             return null;
         }
         
-        String username = null;
+        String vorname = null;
         
         try {
-            username = rs.getString(2);
+            vorname = rs.getString(2);
         } catch (SQLException ex) {
             Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
-
         }
         
-        username = rs.getString(2);
         
-        return username;
+        return vorname;
         
         
     }    

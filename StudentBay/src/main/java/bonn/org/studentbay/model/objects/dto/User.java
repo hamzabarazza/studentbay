@@ -13,10 +13,6 @@ import java.util.Date;
  */
 public class User implements java.io.Serializable {
     
-    
-
-    static private int NEXTID = 1000;
-    
     private Integer userID;
     private String username;
     private String vorname;
@@ -28,9 +24,7 @@ public class User implements java.io.Serializable {
     public User(){ 
     }
     
-    public User(String username ,String vorname, String nachname, Date geburtstag, String email, String passwort){
-        this.userID = NEXTID;
-        ++NEXTID;
+    public User(String username ,String vorname, String nachname, Date geburtstag, String email, String passwort){ 
         this.username= username;
         this.vorname = vorname;
         this.nachname = nachname;
@@ -97,7 +91,5 @@ public class User implements java.io.Serializable {
     public void setPasswort(String neuPasswort){
         this.passwort = neuPasswort;
     }
-    
-    
     
 }

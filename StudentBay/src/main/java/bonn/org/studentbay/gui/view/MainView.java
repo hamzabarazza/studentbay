@@ -101,7 +101,7 @@ public class MainView extends VerticalLayout implements View{
         mainToRegView.addClickListener((Button.ClickEvent e)->{
             UI.getCurrent().getNavigator().navigateTo("registration");
         });
-        
+      
         
         // Button zur LoginView
         Button mainToLogin = new Button("Login");
@@ -115,7 +115,15 @@ public class MainView extends VerticalLayout implements View{
         Label user = new Label("Hallo " + username + "!");
         user.setStyleName("benutzer");
         
-         // Button zur RegistrationView
+        
+        // Button zu ProfileView
+        Button mainToProfile = new Button("Profile");
+        mainToProfile.addClickListener((Button.ClickEvent e )->{
+            UI.getCurrent().getNavigator().navigateTo("profile");
+        });
+        
+        
+         // Button zum Logout
         Button logout = new Button("Logout");
         logout.addClickListener((Button.ClickEvent e)->{
            

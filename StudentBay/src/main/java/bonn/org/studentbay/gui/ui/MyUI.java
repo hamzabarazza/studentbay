@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import bonn.org.studentbay.gui.*;
 import bonn.org.studentbay.gui.view.LoginView;
 import bonn.org.studentbay.gui.view.MainView;
+import bonn.org.studentbay.gui.view.ProfileView;
 import bonn.org.studentbay.gui.view.RegistrationView;
 import com.vaadin.annotations.PreserveOnRefresh;
 
@@ -37,6 +38,7 @@ public class MyUI extends UI {
     navi.addView("login", LoginView.class);
     navi.addView("main", MainView.class);
     navi.addView("registration", RegistrationView.class);
+    navi.addView("profile", ProfileView.class);
     
        UI.getCurrent().getNavigator().navigateTo("main");
     }

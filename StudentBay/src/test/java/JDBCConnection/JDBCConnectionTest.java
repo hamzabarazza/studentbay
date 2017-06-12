@@ -33,14 +33,14 @@ public class JDBCConnectionTest {
 	
         User user = new User();
         
-        RegistrationControl regcontrol = new RegistrationControl();
+        // RegistrationControl regcontrol = new RegistrationControl();
 
         
         @Test
         public void JDBCConnection_CREATEandREAD(){
             
             try {
-                regcontrol.registerUser(username,vorname,nachname, geburtstag, email, password);
+                RegistrationControl.registerUser(username,vorname,nachname, geburtstag, email, password);
             } catch (RegisterFail ex) {
                 Logger.getLogger(JDBCConnectionTest.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -63,7 +63,7 @@ public class JDBCConnectionTest {
         @Test
         public void JDBCConnection_DELETE(){
             
-            user.deleteData();
+            // user.deleteData();
             
             assertNull(user.getUsername());
             assertNull(user.getVorname());
