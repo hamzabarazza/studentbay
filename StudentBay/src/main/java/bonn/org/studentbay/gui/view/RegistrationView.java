@@ -16,6 +16,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.DateField;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import static com.vaadin.ui.Notification.show;
@@ -37,28 +38,31 @@ public class RegistrationView extends VerticalLayout implements View {
     public void setUp(){
         
         TextField usernameField = new TextField();
-        usernameField.setCaption("Benutzername: ");
+        usernameField.setCaption("Benutzername*");
         
         TextField vornameField = new TextField();
-        vornameField.setCaption("Vorname: ");
+        vornameField.setCaption("Vorname*");
                 
         TextField nachnameField = new TextField();
-        nachnameField.setCaption("Nachname: ");
+        nachnameField.setCaption("Nachname*");
                 
         DateField geburtstagField = new DateField();
-        geburtstagField.setCaption("Geburtstag: ");
+        geburtstagField.setCaption("Geburtstag*");
         
         TextField emailField = new TextField();
-        emailField.setCaption("Email: ");
+        emailField.setCaption("Email*");
         
         PasswordField passwordField = new PasswordField();
-        passwordField.setCaption("Passwort: ");
+        passwordField.setCaption("Passwort*");
         
         PasswordField passworderneutField = new PasswordField();
-        passworderneutField.setCaption("Passwort erneut eingeben: ");
+        passworderneutField.setCaption("Passwort erneut eingeben*");
         
-        CheckBox agbacceptBox = new CheckBox("AGB Akzeptieren");
-
+        CheckBox agbacceptBox = new CheckBox("AGB Akzeptieren*");
+        
+        
+        
+        /*
         // Regestrierungs Kriterien
         // Username Kritieren
         Label usernameKritierien = new Label("Benutzername muss 5-16 Zeichen lang sein.");
@@ -80,6 +84,8 @@ public class RegistrationView extends VerticalLayout implements View {
         this.addComponent(agbKritierien);
         this.setComponentAlignment(agbKritierien, Alignment.MIDDLE_RIGHT);
         
+        */
+        
         // Vertical Layout Box
         VerticalLayout registrationLayout = new VerticalLayout();
         registrationLayout.addComponents(usernameField, vornameField, nachnameField, geburtstagField, emailField, passwordField, passworderneutField,agbacceptBox);
@@ -90,15 +96,13 @@ public class RegistrationView extends VerticalLayout implements View {
         this.addComponent(registrationPanel);
         this.setComponentAlignment(registrationPanel, Alignment.MIDDLE_CENTER);
         
-        
+       
         registrationPanel.setStyleName("center");
         registrationPanel.setContent(registrationLayout);
         // registrationPanel.setSizeUndefined();
         
         Button registrationButton = new Button("Registrieren", FontAwesome.ARROW_RIGHT);
-        this.addComponent(registrationButton);
-        this.setComponentAlignment(registrationButton, Alignment.MIDDLE_CENTER);
-        
+       
         registrationButton.addClickListener(new Button.ClickListener(){
         
         @Override
@@ -168,9 +172,7 @@ public class RegistrationView extends VerticalLayout implements View {
     });
         
       Button cancelButton = new Button("Zurück", FontAwesome.ARROW_LEFT);
-    addComponent(cancelButton);
-    setComponentAlignment(cancelButton, Alignment.MIDDLE_CENTER);
-    
+   
     cancelButton.addClickListener(new Button.ClickListener(){
         
         @Override
@@ -182,7 +184,14 @@ public class RegistrationView extends VerticalLayout implements View {
     });  
         
         
-        
+       HorizontalLayout buttons = new HorizontalLayout();
+     buttons.addComponent(cancelButton);
+     buttons.addComponent(registrationButton);
+     addComponent(buttons);
+     
+    setComponentAlignment(buttons, Alignment.MIDDLE_CENTER);
+    
+     
         
     }
     

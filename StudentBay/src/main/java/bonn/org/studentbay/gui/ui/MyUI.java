@@ -3,6 +3,8 @@ package bonn.org.studentbay.gui.ui;
 
 import javax.servlet.annotation.WebServlet;
 import bonn.org.studentbay.gui.*;
+import bonn.org.studentbay.gui.view.AddArtikelView;
+import bonn.org.studentbay.gui.view.AddShopView;
 import bonn.org.studentbay.gui.view.LoginView;
 import bonn.org.studentbay.gui.view.MainView;
 import bonn.org.studentbay.gui.view.ProfileView;
@@ -39,6 +41,9 @@ public class MyUI extends UI {
     navi.addView("main", MainView.class);
     navi.addView("registration", RegistrationView.class);
     navi.addView("profile", ProfileView.class);
+    navi.addView("addartikel", AddArtikelView.class);
+    navi.addView("addshop", AddShopView.class);
+    
     
        UI.getCurrent().getNavigator().navigateTo("main");
     }

@@ -13,13 +13,14 @@ import java.util.Date;
  */
 public class User implements java.io.Serializable {
     
+    private static boolean geloggt = false;
     private Integer userID;
-    private String username;
-    private String vorname;
-    private String nachname;
-    private Date geburtstag;
-    private String email;
-    private String passwort;
+    private static String username;
+    private static String vorname;
+    private static String nachname;
+    private static Date geburtstag;
+    private static String email;
+    private static String passwort;
     
     public User(){ 
     }
@@ -31,7 +32,18 @@ public class User implements java.io.Serializable {
         this.geburtstag = geburtstag;
         this.email = email;
         this.passwort = passwort;
+        this.geloggt = true;
     }
+    
+    
+    public static Boolean getLogged(){
+        return  geloggt;
+    }
+    
+     public void setLogged(Boolean wert){
+        this.geloggt = wert;
+    }
+     
     
     public Integer getID(){
         return this. userID;
@@ -44,48 +56,48 @@ public class User implements java.io.Serializable {
     }
     */
     
-    public String getUsername(){
-        return this.username;
+    public static String getUsername(){
+        return username;
     }
     
     public void setUsername(String neuUsername){
         this.username = neuUsername;
     }
     
-    public String getVorname(){
-        return this.vorname;
+    public static String getVorname(){
+        return vorname;
     }
     
     public void setVorname(String neuVorname){
         this.vorname = neuVorname;
     }
     
-    public String getNachname(){
-        return this.nachname;
+    public static String getNachname(){
+        return nachname;
     }
 
     public void setNachname(String neuNachname){
         this.nachname = neuNachname;
     }
 
-    public Date getGeburtstag(){
-       return this.geburtstag;
+    public static Date getGeburtstag(){
+       return geburtstag;
     }
     
     public void setGeburtstag(Date neuGeburtstag){
         this.geburtstag = neuGeburtstag;
     }
     
-    public String getEmail(){
-        return this.email;
+    public static String getEmail(){
+        return email;
     }
     
     public void setEmail(String neuEmail){
         this.email = neuEmail;
     }
     
-    public String getPasswort(){
-        return this.passwort;
+    public static String getPasswort(){
+        return passwort;
     }
     
     public void setPasswort(String neuPasswort){

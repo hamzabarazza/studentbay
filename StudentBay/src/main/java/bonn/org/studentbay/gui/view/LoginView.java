@@ -5,6 +5,7 @@
  */
 package bonn.org.studentbay.gui.view;
 
+import bonn.org.studentbay.gui.components.TopPanel;
 import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.process.control.exceptions.NoSuchUserOrPassword;
 import com.vaadin.navigator.View;
@@ -12,6 +13,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
@@ -26,6 +28,7 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class LoginView extends VerticalLayout implements View{
 public void setUp(){
+    
     
     TextField username = new TextField();
     username.setCaption("Benutzername");
@@ -45,9 +48,7 @@ public void setUp(){
     login.setContent(loginscreen);
     login.setSizeUndefined();
     Button loginButton = new Button("Login", FontAwesome.ARROW_RIGHT);
-    addComponent(loginButton);
-    setComponentAlignment(loginButton, Alignment.MIDDLE_CENTER);
-    
+   
     loginButton.addClickListener(new Button.ClickListener(){
         
         @Override
@@ -70,9 +71,7 @@ public void setUp(){
     });  
     
     Button cancelButton = new Button("Zurück", FontAwesome.ARROW_LEFT);
-    addComponent(cancelButton);
-    setComponentAlignment(cancelButton, Alignment.MIDDLE_CENTER);
-    
+   
     cancelButton.addClickListener(new Button.ClickListener(){
         
         @Override
@@ -82,6 +81,19 @@ public void setUp(){
         }  
 
     });
+    
+    
+    
+    HorizontalLayout buttons = new HorizontalLayout();
+     buttons.addComponent(cancelButton);
+     buttons.addComponent(loginButton);
+     addComponent(buttons);
+     
+    setComponentAlignment(buttons, Alignment.MIDDLE_CENTER);
+    
+    
+    
+    
     
     
 }    

@@ -44,14 +44,17 @@ public class LoginControl {
             System.out.println("Fehler in der SQL-Anweisung!");
         }
         
-        User user = null;
+        User user = new User();
         
         try{
         
           if( set.next()){
             user = new User();
             user.setUsername(set.getString(10));
-            user.setVorname(set.getString(3));
+            user.setVorname(set.getString(2));
+            user.setNachname(set.getString(3));
+            user.setEmail(set.getString(4));
+            user.setLogged(true);
 
            Notification notif = new Notification(
                 "Herzlich Willkommen " + user.getUsername() + "!",
