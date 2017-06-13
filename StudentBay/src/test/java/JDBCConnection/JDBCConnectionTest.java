@@ -40,6 +40,7 @@ public class JDBCConnectionTest {
         public void JDBCConnection_CREATEandREAD(){
             
             try {
+                
                 RegistrationControl.registerUser(username,vorname,nachname, geburtstag, email, password);
             } catch (RegisterFail ex) {
                 Logger.getLogger(JDBCConnectionTest.class.getName()).log(Level.SEVERE, null, ex);

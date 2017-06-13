@@ -39,7 +39,7 @@ public class AddArtikelView extends VerticalLayout implements View{
              
         //artikelname, beschreibung, kategorie       
     TextField artikelname = new TextField();
-    artikelname.setCaption("Artikelbezeichnung");
+    artikelname.setCaption("Artikelname");
       
     TextField beschreibung = new TextField();
     beschreibung.setCaption("Beschreibung");

@@ -33,6 +33,7 @@ import com.vaadin.ui.UI;
 @PreserveOnRefresh
 public class MyUI extends UI {
 
+    
     @Override
     protected void init(VaadinRequest vaadinRequest) {
     Navigator navi = new Navigator(this, this);

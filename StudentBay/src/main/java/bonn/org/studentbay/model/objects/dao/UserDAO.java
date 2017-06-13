@@ -38,8 +38,6 @@ public class UserDAO{
         Statement statement = null;
         
         statement = JDBCConnection.getInstance().getStatement();
-        
-        
         ResultSet rs = null;
         
         try{
