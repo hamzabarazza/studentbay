@@ -36,6 +36,8 @@ public class User implements java.io.Serializable {
     }
     
     
+    
+    
     public static Boolean getLogged(){
         return  geloggt;
     }

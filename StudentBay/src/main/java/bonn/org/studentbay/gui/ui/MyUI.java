@@ -41,8 +41,8 @@ public class MyUI extends UI {
     navi.addView("main", MainView.class);
     navi.addView("registration", RegistrationView.class);
     navi.addView("profile", ProfileView.class);
+    navi.addView("addshop", AddShopView.class);    
     navi.addView("addartikel", AddArtikelView.class);
-    navi.addView("addshop", AddShopView.class);
     
     
        UI.getCurrent().getNavigator().navigateTo("main");

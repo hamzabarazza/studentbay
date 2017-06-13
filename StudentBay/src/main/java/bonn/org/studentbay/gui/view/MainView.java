@@ -53,7 +53,7 @@ public class MainView extends VerticalLayout implements View{
         Panel inhaltPanel = new Panel("Herzlich Willkommen bei StudentBay!");
         inhaltPanel.setStyleName("content_block");
         
-        Label bla = new Label("Beispiel inhalt");
+        Label bla = new Label("Starten Sie Ihre Suche oder Registrieren Sie sich um Artikel/Dienstleistungen zu kaufen oder verkaufen.");
         inhaltPanel.setContent(bla);
         
         
