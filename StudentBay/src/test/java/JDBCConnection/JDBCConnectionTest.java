@@ -22,7 +22,7 @@ import org.junit.Test;
  */
 public class JDBCConnectionTest {
 
-	
+	/*
 
 	final String username = "superman";
 	final String vorname = "super";
@@ -72,6 +72,6 @@ public class JDBCConnectionTest {
             assertNull(user.getPasswort());
             assertNull(user.getID());
         }
-        
+        */
         
 }
