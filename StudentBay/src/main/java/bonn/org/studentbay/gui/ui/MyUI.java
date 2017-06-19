@@ -9,6 +9,7 @@ import bonn.org.studentbay.gui.view.LoginView;
 import bonn.org.studentbay.gui.view.MainView;
 import bonn.org.studentbay.gui.view.ProfileView;
 import bonn.org.studentbay.gui.view.RegistrationView;
+import bonn.org.studentbay.gui.view.SucheView;
 import com.vaadin.annotations.PreserveOnRefresh;
 
 import com.vaadin.annotations.Theme;
@@ -44,7 +45,7 @@ public class MyUI extends UI {
     navi.addView("profile", ProfileView.class);
     navi.addView("addshop", AddShopView.class);    
     navi.addView("addartikel", AddArtikelView.class);
-    
+    navi.addView("suche", SucheView.class);
     
        UI.getCurrent().getNavigator().navigateTo("main");
     }

@@ -16,5 +16,6 @@ public class Roles {
     public static final String CURRENT_VORNAME = "vorname";
     public static final String CURRENT_NACHNAME = "nachname";
     public static final String CURRENT_GEBURTSTAG = "geburstag";
+    public static final String CURRENT_SEARCH = "currentSearch";
     
 }

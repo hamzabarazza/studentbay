@@ -14,6 +14,7 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import static com.vaadin.server.Sizeable.UNITS_EM;
 import com.vaadin.server.VaadinService;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -70,6 +71,16 @@ public class TopPanel extends HorizontalLayout{
         Button suche = new Button("Suchen", FontAwesome.SEARCH);
         suche.addClickListener((Button.ClickEvent e) -> {
             //Aktion beim Suchebutton
+            
+            //Suchwort in Session speichern
+             VaadinSession session = UI.getCurrent().getSession();
+              session.setAttribute(Roles.CURRENT_SEARCH, suchEingabe.getValue());
+        
+        
+        UI.getCurrent().getNavigator().navigateTo("suche");
+            //weiterleiten zu Suchview
+            //in View die SuchControl ausführen
+            
         });
         suchFeld.addComponents(suchEingabe, suche);
         
