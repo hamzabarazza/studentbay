@@ -8,6 +8,7 @@ package bonn.org.studentbay.gui.view;
 import bonn.org.studentbay.gui.components.Footer;
 import bonn.org.studentbay.gui.components.NavMenu;
 import bonn.org.studentbay.gui.components.TopPanel;
+import bonn.org.studentbay.process.control.SearchControl;
 import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -26,29 +27,21 @@ public class SucheView extends VerticalLayout implements View{
     
     public void setUp(){
         
-        //Suchwort in Session speichern
-        VaadinSession session = UI.getCurrent().getSession();
-        String suchText =  (String)session.getAttribute(Roles.CURRENT_SEARCH);
         
-        
-     
-       
-        //Content-----------------------------------------------------------------
-         Panel inhaltPanel = new Panel("");
+        Panel inhaltPanel = new Panel("");
         Label inhalt = new Label();
         
-             
-             
-        // Suche überprüfen und dann suchen
-        if("".equals(suchText)){
-            inhalt.setValue("Sie haben kein Suchwort eingegeben!");
-            inhaltPanel.setCaption("Überprüfen Sie Ihre Eingabe!");
-        }else{
-            inhalt.setValue("asjdn");
-            inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
+        VaadinSession session = UI.getCurrent().getSession();
+        String suchText =  (String)session.getAttribute(Roles.CURRENT_SEARCH);
+        String suche =  (String)session.getAttribute("suchausgabe");
         
-        }
-         
+             
+        inhalt.setValue(suche);
+        inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
+      
+        
+        
+        
         inhaltPanel.setContent(inhalt);
         
          inhaltPanel.setStyleName("content_block"); 

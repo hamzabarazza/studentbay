@@ -6,6 +6,7 @@
 package bonn.org.studentbay.gui.components;
 
 import bonn.org.studentbay.model.objects.dto.User;
+import bonn.org.studentbay.process.control.SearchControl;
 import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -72,14 +73,18 @@ public class TopPanel extends HorizontalLayout{
         suche.addClickListener((Button.ClickEvent e) -> {
             //Aktion beim Suchebutton
             
-            //Suchwort in Session speichern
-             VaadinSession session = UI.getCurrent().getSession();
-              session.setAttribute(Roles.CURRENT_SEARCH, suchEingabe.getValue());
+         
+         if(suchEingabe.getValue().equals("")){
+            Notification.show(null,"Bitte geben Sie ein Suchwort ein!", Notification.Type.WARNING_MESSAGE);
+        }else{   
+                //Suchwort in Session speichern
+                VaadinSession session = UI.getCurrent().getSession();
+                session.setAttribute(Roles.CURRENT_SEARCH, suchEingabe.getValue());
+                //SearchControl.suchausgabe(suchEingabe.getValue());    
+                //weiterleiten zu Suchview
+                UI.getCurrent().getNavigator().navigateTo("suche");
+                }   
         
-        
-        UI.getCurrent().getNavigator().navigateTo("suche");
-            //weiterleiten zu Suchview
-            //in View die SuchControl ausführen
             
         });
         suchFeld.addComponents(suchEingabe, suche);

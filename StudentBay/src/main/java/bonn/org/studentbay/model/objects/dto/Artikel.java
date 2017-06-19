@@ -16,7 +16,8 @@ public class Artikel {
     private String artikelKategorie;
     private Integer artikelID;
     
-    public Artikel(){
+    public Artikel(){ 
+        
     }
     
     public Artikel(String artikelname, String beschreibung, String kategorie){
