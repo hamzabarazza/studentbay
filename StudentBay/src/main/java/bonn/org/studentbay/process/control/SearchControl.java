@@ -10,7 +10,7 @@ import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 import java.util.ArrayList;
-
+import java.util.List;
 /**
  *
  * @author Lorse
@@ -27,7 +27,7 @@ public class SearchControl {
     private Artikel artikel8 = new Artikel("SE2","BEschreibung","Alte_klausure");
    
     private Artikel artikel9 = new Artikel("SE2","BEschreibung","Übungen");
-    private Artikel artikel10 = new Artikel("Graphentheorie","BEschreibung","Alte_klausure");
+    private static Artikel artikel10 = new Artikel("Graphentheorie","BEschreibung","Alte_klausure");
     private Artikel artikel11 = new Artikel("Nachhilfe","BEschreibung","In Programmierung");
     private Artikel artikel12 = new Artikel("Nachhilfe","BEschreibung","In Algebra");
     private Artikel artikel13 = new Artikel("Nachhilfe","BEschreibung","In Algodat");
@@ -45,11 +45,11 @@ public class SearchControl {
         }
         return search;
     }
-    public List<Artikel> getArtikelByName(String name){
+    public static List<Artikel> getArtikelByName(String name){
         // Datenbank Zugriff später
         ArrayList<Artikel> list = new ArrayList<Artikel>();
         
-        if(name.equals("Algebra")) list.add(artikel1);
+       /* if(name.equals("Algebra")) list.add(artikel1);
         if(name.equals("Algebra")) list.add(artikel2);
         if(name.equals("Datenbank")) list.add(artikel3);
         if(name.equals("Datenbank")) list.add(artikel4);
@@ -63,8 +63,16 @@ public class SearchControl {
         if(name.equals("SE2")) list.add(artikel8);
         if(name.equals("SE2")) list.add(artikel9);
          if(name.equals("Graphentheorie")) list.add(artikel10);
-        
+        */
+       list.add(artikel10);
          return list;
+    }
+    
+    public static String getName(String suchText){
+        String ergebnis = suchText;
+        
+        
+        return ergebnis;
     }
 }
 

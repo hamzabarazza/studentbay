@@ -5,7 +5,9 @@
  */
 package bonn.org.studentbay.process.control;
 
+import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 
 /**
@@ -14,5 +16,21 @@ import com.vaadin.ui.UI;
  */
 public class LogoutControl {
     
-    
+    public static void logout(){
+        
+            UI.getCurrent().getSession().close();
+            //getSession().getSession().invalidate();
+            Page.getCurrent().reload();
+          
+              Notification notif = new Notification(
+                " Auf Wiedersehen!",
+                "Erfolgreich ausgeloggt!",
+                Notification.TYPE_WARNING_MESSAGE);
+
+            // Customize it
+            notif.setDelayMsec(5000);
+
+            // Show it in the page
+            notif.show(Page.getCurrent());
+    }
     }

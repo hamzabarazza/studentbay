@@ -11,6 +11,7 @@ import com.vaadin.ui.UI;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +29,7 @@ public class ShopControl {
         try {
             
 
-            set = statement.executeQuery("INSERT INTO studentbay.shop (artikelname, beschreibung, kategorie) VALUES (\'" + shopname + "\', \'" + vorkasse + "\',\'" 
+            set = statement.executeQuery("INSERT INTO studentbay.shop (erstelldatum, name, vorkasse, nachname, paypal, rechnung, kreditkarte, lastschrift) VALUES (\'" + LocalDate.now() + "\', \'" + shopname + "\', \'" + vorkasse + "\',\'" 
                     + nachnahme + "\', \'" + paypal + "\', \'" + rechnung + "\', \'" + kreditkarte + "\', \'" + lastschrift + "\')");
             
   

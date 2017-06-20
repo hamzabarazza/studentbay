@@ -13,14 +13,14 @@ import java.util.Date;
  */
 public class User implements java.io.Serializable {
     
-    private static boolean geloggt = false;
+    private boolean geloggt = false;
     private Integer userID;
-    private static String username;
-    private static String vorname;
-    private static String nachname;
-    private static Date geburtstag;
-    private static String email;
-    private static String passwort;
+    private String username;
+    private String vorname;
+    private String nachname;
+    private Date geburtstag;
+    private String email;
+    private String passwort;
     
     public User(){ 
     }
@@ -38,7 +38,7 @@ public class User implements java.io.Serializable {
     
     
     
-    public static Boolean getLogged(){
+    public Boolean getLogged(){
         return  geloggt;
     }
     
@@ -58,7 +58,7 @@ public class User implements java.io.Serializable {
     }
     */
     
-    public static String getUsername(){
+    public String getUsername(){
         return username;
     }
     
@@ -66,7 +66,7 @@ public class User implements java.io.Serializable {
         this.username = neuUsername;
     }
     
-    public static String getVorname(){
+    public String getVorname(){
         return vorname;
     }
     
@@ -74,7 +74,7 @@ public class User implements java.io.Serializable {
         this.vorname = neuVorname;
     }
     
-    public static String getNachname(){
+    public String getNachname(){
         return nachname;
     }
 
@@ -82,7 +82,7 @@ public class User implements java.io.Serializable {
         this.nachname = neuNachname;
     }
 
-    public static Date getGeburtstag(){
+    public Date getGeburtstag(){
        return geburtstag;
     }
     
@@ -90,7 +90,7 @@ public class User implements java.io.Serializable {
         this.geburtstag = neuGeburtstag;
     }
     
-    public static String getEmail(){
+    public String getEmail(){
         return email;
     }
     
@@ -98,7 +98,7 @@ public class User implements java.io.Serializable {
         this.email = neuEmail;
     }
     
-    public static String getPasswort(){
+    public String getPasswort(){
         return passwort;
     }
     

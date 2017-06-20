@@ -10,10 +10,14 @@ import bonn.org.studentbay.gui.components.NavMenu;
 import bonn.org.studentbay.gui.components.TopPanel;
 import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.LoginControl;
+import bonn.org.studentbay.process.control.ShopControl;
 import bonn.org.studentbay.process.control.exceptions.NoSuchUserOrPassword;
+import bonn.org.studentbay.process.control.exceptions.RegisterFail;
+import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
@@ -25,6 +29,8 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,8 +46,9 @@ public class AddShopView extends VerticalLayout implements View{
         Panel inhaltPanel = new Panel("Shop hinzufügen");
         inhaltPanel.setStyleName("content_block");
         
-        
-        if(User.getLogged()){
+        VaadinSession session = UI.getCurrent().getSession();
+       User user = (User) session.getAttribute(Roles.CURRENT_USER);
+        if(user.getLogged()){
             
                
     TextField shopName = new TextField();
@@ -65,7 +72,11 @@ public class AddShopView extends VerticalLayout implements View{
         
         @Override
         public void buttonClick(Button.ClickEvent event){
-           
+            try {
+                ShopControl.registerShop(shopName.getValue(),checkbox1.getValue(),checkbox2.getValue(),checkbox3.getValue(),checkbox4.getValue(),checkbox5.getValue(),checkbox6.getValue());
+            } catch (RegisterFail ex) {
+                Logger.getLogger(AddShopView.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }     
     });  

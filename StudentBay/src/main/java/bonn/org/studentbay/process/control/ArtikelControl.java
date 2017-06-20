@@ -27,9 +27,10 @@ public class ArtikelControl {
         ResultSet set = null;
         try {
             
-
-            set = statement.executeQuery("INSERT INTO studentbay.artikel (artikelname, beschreibung, kategorie) VALUES (\'" + artikelname + "\', \'" + beschreibung + "\',\'" 
-                    + kategorie + "\')");
+            Integer userid = 1;
+            Integer shopid = 2;
+            set = statement.executeQuery("INSERT INTO studentbay.artikel (artikelname, beschreibung, kategorie,userid,shopid) VALUES (\'" + artikelname + "\', \'" + beschreibung + "\',\'" 
+                    + kategorie + "\',\'" + userid + "\',\'" + shopid + "\')");
             
   
   

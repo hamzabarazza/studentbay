@@ -6,6 +6,7 @@
 package bonn.org.studentbay.gui.components;
 
 import bonn.org.studentbay.model.objects.dto.User;
+import bonn.org.studentbay.process.control.LogoutControl;
 import bonn.org.studentbay.process.control.SearchControl;
 import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
@@ -39,12 +40,11 @@ public class TopPanel extends HorizontalLayout{
        // Label bla = new Label("askjnfkasjf");
        // addComponent(bla);
        
-       
+       VaadinSession session = UI.getCurrent().getSession();
+       User user = (User) session.getAttribute(Roles.CURRENT_USER);
          setWidth("100%");
         
-        Boolean userLoggedIn = false;
-  
-        
+     
         //Top Leiste----------------------------------------------------
         HorizontalLayout topLeiste = new HorizontalLayout();
         
@@ -78,7 +78,6 @@ public class TopPanel extends HorizontalLayout{
             Notification.show(null,"Bitte geben Sie ein Suchwort ein!", Notification.Type.WARNING_MESSAGE);
         }else{   
                 //Suchwort in Session speichern
-                VaadinSession session = UI.getCurrent().getSession();
                 session.setAttribute(Roles.CURRENT_SEARCH, suchEingabe.getValue());
                 //SearchControl.suchausgabe(suchEingabe.getValue());    
                 //weiterleiten zu Suchview
@@ -93,16 +92,18 @@ public class TopPanel extends HorizontalLayout{
         
       //Wenn eingeloggt dann Benutzername, sonst Login-Link--------------------------
       
-        String username = User.getUsername();
+        
        
           
           
        
         HorizontalLayout userLogReg = new HorizontalLayout();
 
-
-        Boolean loginStatus = User.getLogged();
-        if(!loginStatus){
+        
+        //Nur wenn eingeloggt
+       Boolean status;
+       if(user==null){status = false;}else{status = true;}
+        if(!status){
         // Button zur RegistrationView
         Button mainToRegView = new Button("Registrieren");
         mainToRegView.addClickListener((Button.ClickEvent e)->{
@@ -119,8 +120,9 @@ public class TopPanel extends HorizontalLayout{
         
         userLogReg.addComponents(mainToLogin, mainToRegView);
         }else{
-        Label user = new Label("Hallo " + username + "!");
-        user.setStyleName("benutzer");
+            
+        Label userWelcome = new Label("Hallo " + user.getUsername() + "!");
+        userWelcome.setStyleName("benutzer");
         
         
         // Button zu ProfileView
@@ -133,26 +135,13 @@ public class TopPanel extends HorizontalLayout{
          // Button zum Logout
         Button logout = new Button("Logout");
         logout.addClickListener((Button.ClickEvent e)->{
-           
-            getSession().getSession().invalidate();
-            Page.getCurrent().reload();
-          
-              Notification notif = new Notification(
-                " Auf Wiedersehen!",
-                "Erfolgreich ausgeloggt!",
-                Notification.TYPE_WARNING_MESSAGE);
-
-            // Customize it
-            notif.setDelayMsec(5000);
-
-            // Show it in the page
-            notif.show(Page.getCurrent());
+           LogoutControl.logout();
             
              
         });
         
         
-        userLogReg.addComponents( user, logout);
+        userLogReg.addComponents( userWelcome, logout);
         
         }
         

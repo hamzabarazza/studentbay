@@ -6,6 +6,8 @@
 package bonn.org.studentbay.gui.components;
 
 import bonn.org.studentbay.model.objects.dto.User;
+import bonn.org.studentbay.services.util.Roles;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -27,9 +29,11 @@ public class NavMenu extends HorizontalLayout{
         Panel newsfeed = new Panel("Navigation");
         newsfeed.setWidth("250px");
         
+        VaadinSession session = UI.getCurrent().getSession();
+       User user = (User) session.getAttribute(Roles.CURRENT_USER);
         
-        Boolean status = User.getLogged();
-        
+       
+    
         //Inhalt des Newsfeeds
         VerticalLayout content = new VerticalLayout();
         content.addStyleName("mypanelcontent");
@@ -61,6 +65,8 @@ public class NavMenu extends HorizontalLayout{
         content.addComponent(homeButton);
         
        //Nur wenn eingeloggt
+       Boolean status;
+       if(user==null){status = false;}else{status = true;}
         if(status){
 
         content.addComponent(profileButton);

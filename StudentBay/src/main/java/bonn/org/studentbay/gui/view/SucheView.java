@@ -8,6 +8,7 @@ package bonn.org.studentbay.gui.view;
 import bonn.org.studentbay.gui.components.Footer;
 import bonn.org.studentbay.gui.components.NavMenu;
 import bonn.org.studentbay.gui.components.TopPanel;
+import bonn.org.studentbay.model.objects.dto.Artikel;
 import bonn.org.studentbay.process.control.SearchControl;
 import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
@@ -18,6 +19,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import java.util.List;
 
 /**
  *
@@ -33,9 +35,12 @@ public class SucheView extends VerticalLayout implements View{
         
         VaadinSession session = UI.getCurrent().getSession();
         String suchText =  (String)session.getAttribute(Roles.CURRENT_SEARCH);
-        String suche =  (String)session.getAttribute("suchausgabe");
         
-             
+        
+       // BeanContainer<Integer,Artikel> data = new BeanContainer<Integer,Artikel>();
+        //List suche = SearchControl.getArtikelByName(suchText);
+       String suche =  SearchControl.getName(suchText);
+        
         inhalt.setValue(suche);
         inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
       
