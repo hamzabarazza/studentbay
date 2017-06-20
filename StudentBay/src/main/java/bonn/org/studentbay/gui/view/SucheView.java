@@ -20,7 +20,8 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import java.util.List;
-
+import com.vaadin.data.util.BeanContainer;
+import com.vaadin.ui.Table;
 /**
  *
  * @author Lorse
@@ -36,17 +37,21 @@ public class SucheView extends VerticalLayout implements View{
         VaadinSession session = UI.getCurrent().getSession();
         String suchText =  (String)session.getAttribute(Roles.CURRENT_SEARCH);
         
-        
-       // BeanContainer<Integer,Artikel> data = new BeanContainer<Integer,Artikel>();
-        //List suche = SearchControl.getArtikelByName(suchText);
-       String suche =  SearchControl.getName(suchText);
-        
-        inhalt.setValue(suche);
+       
+       BeanContainer<Integer,Artikel> data = new BeanContainer<Integer,Artikel>(Artikel.class);
+       data.setBeanIdProperty("id");
+       Table table = new Table("Treffer", data);
+       table.setSizeFull();
+       table.setSelectable(true);
+       
+       List list =  SearchControl.getInstance().getArtikelByName(suchText);
+       data.removeAllItems();
+       data.addAll(list);
+       
+       
+        inhalt.setValue(table);
         inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
       
-        
-        
-        
         inhaltPanel.setContent(inhalt);
         
          inhaltPanel.setStyleName("content_block"); 

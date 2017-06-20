@@ -70,9 +70,13 @@ public class SearchControl {
     
     public static String getName(String suchText){
         String ergebnis = suchText;
+        if(suchText.equals("Bonn")){
+         return "Sie haben nach \""+ergebnis+"\" gesucht.";   
+        }else{
+            return "Ihre Suche ergab keine Treffer!";
+        }
         
         
-        return ergebnis;
     }
 }
 
