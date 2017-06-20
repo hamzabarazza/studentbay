@@ -1,6 +1,4 @@
 package bonn.org.studentbay.gui.ui;
-
-
 import javax.servlet.annotation.WebServlet;
 import bonn.org.studentbay.gui.*;
 import bonn.org.studentbay.gui.view.AddArtikelView;
