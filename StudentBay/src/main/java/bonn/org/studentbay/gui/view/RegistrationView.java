@@ -26,6 +26,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -112,7 +113,7 @@ public class RegistrationView extends VerticalLayout implements View {
             String username = usernameField.getValue();
             String vorname = vornameField.getValue();
             String nachname = nachnameField.getValue();
-            LocalDate geburtstag = geburtstagField.getValue();
+            Date geburtstag = geburtstagField.getValue();
             String email = emailField.getValue();
             String password = passwordField.getValue();
             String passworderneut = passworderneutField.getValue();

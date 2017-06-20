@@ -49,7 +49,7 @@ public class SucheView extends VerticalLayout implements View{
        data.addAll(list);
        
        
-        inhalt.setValue(table);
+        //inhalt.setValue(table);
         inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
       
         inhaltPanel.setContent(inhalt);
@@ -59,13 +59,13 @@ public class SucheView extends VerticalLayout implements View{
         
        
          HorizontalLayout mitte = new HorizontalLayout();
-        mitte.addComponent(new NavMenu()); //Navigation hinzufügen
-        mitte.addComponent(inhaltPanel); //Content hinzufügen
+        mitte.addComponent(new NavMenu()); //Navigation hinzufÃ¼gen
+        mitte.addComponents(inhaltPanel,table); //Content hinzufÃ¼gen
         
         
        
         
-        //Alle Elemente hinzufügen
+        //Alle Elemente hinzufÃ¼gen
         addComponents( new TopPanel(),  mitte, new Footer());
     }  
 

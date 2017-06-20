@@ -14,7 +14,7 @@
 	</prerequisites>
 
 	<properties>
-		<vaadin.version>8.0.5</vaadin.version>
+		<vaadin.version>7.7.4</vaadin.version>
 		<vaadin.plugin.version>8.0.5</vaadin.plugin.version>
 		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -112,6 +112,12 @@
 	  <groupId>org.vaadin.addons</groupId>
 	  <artifactId>gaedatastorecontainers</artifactId>
 	  <version>2.0.0</version>
+	  <type>jar</type>
+	 </dependency>
+	 <dependency>
+	  <groupId>com.vaadin</groupId>
+	  <artifactId>vaadin-shared</artifactId>
+	  <version>8.0.6</version>
 	  <type>jar</type>
 	 </dependency>
 	</dependencies>

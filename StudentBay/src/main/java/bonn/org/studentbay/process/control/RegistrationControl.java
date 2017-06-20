@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +25,7 @@ public class RegistrationControl{
     public RegistrationControl(){  
     }
     
-    public static void registerUser(String username, String vorname, String nachname, LocalDate geburtstag, String email, String password) throws RegisterFail{
+    public static void registerUser(String username, String vorname, String nachname, Date geburtstag, String email, String password) throws RegisterFail{
          
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;
