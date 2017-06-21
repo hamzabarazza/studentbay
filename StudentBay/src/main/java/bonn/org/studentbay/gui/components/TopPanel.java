@@ -70,7 +70,7 @@ public class TopPanel extends HorizontalLayout{
         HorizontalLayout suchFeld = new HorizontalLayout();
         final TextField suchEingabe = new TextField();
         Button suche = new Button("Suchen", FontAwesome.SEARCH);
-        suche.addClickListener((Button.ClickEvent e) -> {
+        suche.addClickListener(e ->  {
             //Aktion beim Suchebutton
             
          
@@ -106,14 +106,14 @@ public class TopPanel extends HorizontalLayout{
         if(!status){
         // Button zur RegistrationView
         Button mainToRegView = new Button("Registrieren");
-        mainToRegView.addClickListener((Button.ClickEvent e)->{
+        mainToRegView.addClickListener(e -> {
             UI.getCurrent().getNavigator().navigateTo("registration");
         });
       
         
         // Button zur LoginView
         Button mainToLogin = new Button("Login");
-        mainToLogin.addClickListener((Button.ClickEvent e)->{
+        mainToLogin.addClickListener(e -> {
             UI.getCurrent().getNavigator().navigateTo("login");
         });
         
@@ -134,7 +134,7 @@ public class TopPanel extends HorizontalLayout{
         
          // Button zum Logout
         Button logout = new Button("Logout");
-        logout.addClickListener((Button.ClickEvent e)->{
+        logout.addClickListener(e -> {
            LogoutControl.logout();
             
              

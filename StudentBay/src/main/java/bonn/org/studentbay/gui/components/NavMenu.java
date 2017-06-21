@@ -40,8 +40,13 @@ public class NavMenu extends HorizontalLayout{
         
         
         Button homeButton = new Button("Startseite");
-        homeButton.addClickListener((Button.ClickEvent e)->{
-            UI.getCurrent().getNavigator().navigateTo("main");
+        homeButton.addClickListener(new Button.ClickListener(){
+            
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                UI.getCurrent().getNavigator().navigateTo("main");
+            }
         });
         
         
