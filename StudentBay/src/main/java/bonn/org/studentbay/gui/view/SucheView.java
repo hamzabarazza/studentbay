@@ -22,6 +22,9 @@ import com.vaadin.ui.VerticalLayout;
 import java.util.List;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.ui.Table;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Lorse
@@ -44,15 +47,22 @@ public class SucheView extends VerticalLayout implements View{
        table.setSizeFull();
        table.setSelectable(true);
        
-       List list =  SearchControl.getInstance().getArtikelByName(suchText);
-       data.removeAllItems();
-       data.addAll(list);
+       List list;
+        try {
+            list = SearchControl.getInstance().getArtikelByName(suchText);
+            data.removeAllItems();
+            data.addAll(list);
+        } catch (SQLException ex) {
+            Logger.getLogger(SucheView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
        
        
         //inhalt.setValue(table);
         inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
       
         inhaltPanel.setContent(table);
+        inhaltPanel.setSizeFull();
          inhaltPanel.setStyleName("content_block"); 
         
         

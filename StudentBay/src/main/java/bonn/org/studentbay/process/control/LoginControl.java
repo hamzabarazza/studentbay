@@ -49,7 +49,7 @@ public class LoginControl {
         try{
         
           if( set.next()){
-            user = new User();
+            
             user.setUsername(set.getString(10));
             user.setVorname(set.getString(2));
             user.setNachname(set.getString(3));

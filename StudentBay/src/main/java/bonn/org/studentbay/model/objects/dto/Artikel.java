@@ -9,7 +9,7 @@ package bonn.org.studentbay.model.objects.dto;
  *
  * @author jens
  */
-public class Artikel {
+public class Artikel implements java.io.Serializable{
     
     private String artikelName;
     private String artikelBeschreibung;
@@ -29,6 +29,10 @@ public class Artikel {
 
     public Integer getID(){
         return this.artikelID;
+    }
+    
+    public void setID(Integer newArtikelID){
+        this.artikelID = newArtikelID;
     }
 
     public String getArtikelname(){

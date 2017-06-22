@@ -37,12 +37,12 @@ public class TopPanel extends HorizontalLayout{
     
     public TopPanel(){
     
-       // Label bla = new Label("askjnfkasjf");
-       // addComponent(bla);
+        // Label bla = new Label("askjnfkasjf");
+        // addComponent(bla);
        
-       VaadinSession session = UI.getCurrent().getSession();
-       User user = (User) session.getAttribute(Roles.CURRENT_USER);
-         setWidth("100%");
+        VaadinSession session = UI.getCurrent().getSession();
+        User user = (User) session.getAttribute(Roles.CURRENT_USER);
+        setWidth("100%");
         setMargin(true);
      
         //Top Leiste----------------------------------------------------
