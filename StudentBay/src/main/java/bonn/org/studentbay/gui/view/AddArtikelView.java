@@ -10,6 +10,7 @@ import bonn.org.studentbay.gui.components.NavMenu;
 import bonn.org.studentbay.gui.components.TopPanel;
 import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.ArtikelControl;
+import bonn.org.studentbay.process.control.MeinShopControl;
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
 import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
@@ -24,6 +25,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,43 +46,46 @@ public class AddArtikelView extends VerticalLayout implements View{
         VaadinSession session = UI.getCurrent().getSession();
        User user = (User) session.getAttribute(Roles.CURRENT_USER);
         if(user.getLogged()){
-             
-        //artikelname, beschreibung, kategorie       
-    final TextField artikelname = new TextField();
-    artikelname.setCaption("Artikelname");
-      
-    final TextField beschreibung = new TextField();
-    beschreibung.setCaption("Beschreibung");
-      
-    final TextField kategorie = new TextField();
-    kategorie.setCaption("Kategorie");
-    
-    
-    
-    
-    
-  
-   
-    Button addShopButton = new Button("Artikel hinzufügen", FontAwesome.ARROW_RIGHT);
-   
-    addShopButton.addClickListener(new Button.ClickListener(){
-        
-        @Override
-        public void buttonClick(Button.ClickEvent event){
+                     VerticalLayout addShopPanel = new VerticalLayout();    
             try {
-                ArtikelControl.registerArtikel(artikelname.getValue(), beschreibung.getValue(), kategorie.getValue());
-            } catch (RegisterFail ex) {
+                if(!MeinShopControl.getMeinShop(user.getID()).equals("")){
+                    //artikelname, beschreibung, kategorie
+                    final TextField artikelname = new TextField();
+                    artikelname.setCaption("Artikelname");
+                    
+                    final TextField beschreibung = new TextField();
+                    beschreibung.setCaption("Beschreibung");
+                    
+                    final TextField kategorie = new TextField();
+                    kategorie.setCaption("Kategorie");
+                    
+                    Button addShopButton = new Button("Artikel hinzufügen", FontAwesome.ARROW_RIGHT);
+                    
+                    addShopButton.addClickListener(new Button.ClickListener(){
+                        
+                        @Override
+                        public void buttonClick(Button.ClickEvent event){
+                            try {
+                                VaadinSession session = UI.getCurrent().getSession();
+                                User current_user = (User) session.getAttribute(Roles.CURRENT_USER);
+                                
+                                ArtikelControl.registerArtikel(current_user.getID(), artikelname.getValue(), beschreibung.getValue(), kategorie.getValue());
+                            } catch (RegisterFail ex) {
+                                Logger.getLogger(AddArtikelView.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
+                        }
+                    });
+                    
+                    
+                    addShopPanel.addComponents(artikelname,beschreibung,kategorie);
+                    addShopPanel.addComponent(addShopButton);
+                }else{
+                    addShopPanel.addComponent(new Label("Es wurde noch kein Shop erstellt!"));
+                }
+            } catch (SQLException ex) {
                 Logger.getLogger(AddArtikelView.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        }     
-    });  
-    
-  
-      VerticalLayout addShopPanel = new VerticalLayout();
-    addShopPanel.addComponents(artikelname,beschreibung,kategorie);
-    addShopPanel.addComponent(addShopButton);
-     
    
             inhaltPanel.setContent(addShopPanel);
             

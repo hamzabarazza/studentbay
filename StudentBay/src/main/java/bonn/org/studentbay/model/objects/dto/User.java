@@ -51,6 +51,10 @@ public class User implements java.io.Serializable {
         return this. userID;
     }
     
+     public void setID(Integer id){
+        this.userID = id;
+    }
+    
     /*
     // userID sollte nicht überschrieben werden
     public void setID(Integer neuUserID){

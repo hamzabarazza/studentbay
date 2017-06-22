@@ -20,7 +20,7 @@ public class Artikel implements java.io.Serializable{
         
     }
     
-    public Artikel(String artikelname,Integer id, String beschreibung, String kategorie){
+    public Artikel(Integer id,String artikelname, String beschreibung, String kategorie){
         this.artikelName = artikelname;
         this.artikelBeschreibung = beschreibung;
         this.artikelKategorie = kategorie;

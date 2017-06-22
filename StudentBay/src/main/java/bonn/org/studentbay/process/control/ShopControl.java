@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class ShopControl {
     
-    public static void registerShop(String shopname, Boolean vorkasse, Boolean nachnahme, Boolean paypal, Boolean rechnung, Boolean kreditkarte, Boolean lastschrift) throws RegisterFail{
+    public static void registerShop(Integer userID, String shopname, Boolean vorkasse, Boolean nachnahme, Boolean paypal, Boolean rechnung, Boolean kreditkarte, Boolean lastschrift) throws RegisterFail{
          
          
         Statement statement = JDBCConnection.getInstance().getStatement();

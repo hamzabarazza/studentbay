@@ -20,17 +20,15 @@ import java.util.logging.Logger;
  */
 public class ArtikelControl {
     
-    public static void registerArtikel(String artikelname, String beschreibung, String kategorie) throws RegisterFail{
+    public static void registerArtikel(Integer userid, String artikelname, String beschreibung, String kategorie) throws RegisterFail{
          
          
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;
         try {
             
-            Integer userid = 1;
-            Integer shopid = 2;
             set = statement.executeQuery("INSERT INTO studentbay.artikel (artikelname, beschreibung, kategorie,userid,shopid) VALUES (\'" + artikelname + "\', \'" + beschreibung + "\',\'" 
-                    + kategorie + "\',\'" + userid + "\',\'" + shopid + "\')");
+                    + kategorie + "\',\'" + userid + "\',(SELECT studentbay.nutzer.shopid FROM studentbay.nutzer WHERE userid = "+userid+"))");
             
   
   
