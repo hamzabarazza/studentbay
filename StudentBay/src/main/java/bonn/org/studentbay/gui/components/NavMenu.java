@@ -28,6 +28,8 @@ public class NavMenu extends HorizontalLayout{
     //Newsfeed----------------------------------------------------
         Panel newsfeed = new Panel("Navigation");
         newsfeed.setWidth("250px");
+        newsfeed.setStyleName("navmenu");
+        
         
         VaadinSession session = UI.getCurrent().getSession();
        User user = (User) session.getAttribute(Roles.CURRENT_USER);
@@ -51,9 +53,14 @@ public class NavMenu extends HorizontalLayout{
         
         
         
-        Button profileButton = new Button("mein Profil");
+        Button profileButton = new Button("Mein Profil");
          profileButton.addClickListener((Button.ClickEvent e)->{
             UI.getCurrent().getNavigator().navigateTo("profile");
+        });
+         
+          Button meinShopButton = new Button("Mein Shop");
+         meinShopButton.addClickListener((Button.ClickEvent e)->{
+            UI.getCurrent().getNavigator().navigateTo("meinshop");
         });
          
           Button addShopButton = new Button("Shop hinzufügen");
@@ -74,6 +81,7 @@ public class NavMenu extends HorizontalLayout{
        if(user==null){status = false;}else{status = true;}
         if(status){
 
+        content.addComponent(meinShopButton);
         content.addComponent(profileButton);
         content.addComponent(addShopButton);
         content.addComponent(addArtikelButton);
@@ -84,5 +92,6 @@ public class NavMenu extends HorizontalLayout{
         
         addComponent(newsfeed);
         
+        setMargin(true);
     }
 }

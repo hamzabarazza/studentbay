@@ -43,7 +43,7 @@ public class TopPanel extends HorizontalLayout{
        VaadinSession session = UI.getCurrent().getSession();
        User user = (User) session.getAttribute(Roles.CURRENT_USER);
          setWidth("100%");
-        
+        setMargin(true);
      
         //Top Leiste----------------------------------------------------
         HorizontalLayout topLeiste = new HorizontalLayout();
@@ -155,7 +155,7 @@ public class TopPanel extends HorizontalLayout{
         topLeiste.setComponentAlignment(begruessung, Alignment.TOP_LEFT);
         topLeiste.setComponentAlignment(suchFeld, Alignment.TOP_CENTER);
         
-        
+        topLeiste.setMargin(true);
         addComponent(topLeiste);
         
     }

@@ -20,10 +20,11 @@ public class Artikel {
         
     }
     
-    public Artikel(String artikelname, String beschreibung, String kategorie){
+    public Artikel(String artikelname,Integer id, String beschreibung, String kategorie){
         this.artikelName = artikelname;
         this.artikelBeschreibung = beschreibung;
         this.artikelKategorie = kategorie;
+        this.artikelID = id;
     }
 
     public Integer getID(){

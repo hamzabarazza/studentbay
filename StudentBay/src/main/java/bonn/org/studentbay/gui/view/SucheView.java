@@ -38,22 +38,21 @@ public class SucheView extends VerticalLayout implements View{
         String suchText =  (String)session.getAttribute(Roles.CURRENT_SEARCH);
         
        
-//       BeanContainer<Integer,Artikel> data = new BeanContainer<Integer,Artikel>(Artikel.class);
-//       data.setBeanIdProperty("id");
-//       Table table = new Table("Treffer", data);
-//       table.setSizeFull();
-//       table.setSelectable(true);
-//       
-//       List list =  SearchControl.getInstance().getArtikelByName(suchText);
-//       data.removeAllItems();
-//       data.addAll(list);
+       BeanContainer<Integer,Artikel> data = new BeanContainer<Integer,Artikel>(Artikel.class);
+       data.setBeanIdProperty("ID");
+       Table table = new Table("Treffer", data);
+       table.setSizeFull();
+       table.setSelectable(true);
+       
+       List list =  SearchControl.getInstance().getArtikelByName(suchText);
+       data.removeAllItems();
+       data.addAll(list);
        
        
         //inhalt.setValue(table);
         inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
       
-        inhaltPanel.setContent(inhalt);
-        
+        inhaltPanel.setContent(table);
          inhaltPanel.setStyleName("content_block"); 
         
         

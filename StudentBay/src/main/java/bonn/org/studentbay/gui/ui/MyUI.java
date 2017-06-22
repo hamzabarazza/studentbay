@@ -5,6 +5,7 @@ import bonn.org.studentbay.gui.view.AddArtikelView;
 import bonn.org.studentbay.gui.view.AddShopView;
 import bonn.org.studentbay.gui.view.LoginView;
 import bonn.org.studentbay.gui.view.MainView;
+import bonn.org.studentbay.gui.view.MeinShopView;
 import bonn.org.studentbay.gui.view.ProfileView;
 import bonn.org.studentbay.gui.view.RegistrationView;
 import bonn.org.studentbay.gui.view.SucheView;
@@ -44,6 +45,7 @@ public class MyUI extends UI {
     navi.addView("addshop", AddShopView.class);    
     navi.addView("addartikel", AddArtikelView.class);
     navi.addView("suche", SucheView.class);
+    navi.addView("meinshop", MeinShopView.class);
     
        UI.getCurrent().getNavigator().navigateTo("main");
     }

@@ -113,13 +113,7 @@
 	  <artifactId>gaedatastorecontainers</artifactId>
 	  <version>2.0.0</version>
 	  <type>jar</type>
-	 </dependency>
-	 <dependency>
-	  <groupId>com.vaadin</groupId>
-	  <artifactId>vaadin-shared</artifactId>
-	  <version>8.0.6</version>
-	  <type>jar</type>
-	 </dependency>
+         </dependency>
 	</dependencies>
 
 	<build>
