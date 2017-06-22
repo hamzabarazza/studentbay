@@ -24,7 +24,6 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,28 +36,28 @@ import java.util.regex.Pattern;
 public class RegistrationView extends VerticalLayout implements View {
     public void setUp(){
         
-        TextField usernameField = new TextField();
+        final TextField usernameField = new TextField();
         usernameField.setCaption("Benutzername*");
         
-        TextField vornameField = new TextField();
+        final TextField vornameField = new TextField();
         vornameField.setCaption("Vorname*");
                 
-        TextField nachnameField = new TextField();
+        final TextField nachnameField = new TextField();
         nachnameField.setCaption("Nachname*");
                 
-        DateField geburtstagField = new DateField();
+        final DateField geburtstagField = new DateField();
         geburtstagField.setCaption("Geburtstag*");
         
-        TextField emailField = new TextField();
+        final TextField emailField = new TextField();
         emailField.setCaption("Email*");
         
-        PasswordField passwordField = new PasswordField();
+        final PasswordField passwordField = new PasswordField();
         passwordField.setCaption("Passwort*");
         
-        PasswordField passworderneutField = new PasswordField();
+        final PasswordField passworderneutField = new PasswordField();
         passworderneutField.setCaption("Passwort erneut eingeben*");
         
-        CheckBox agbacceptBox = new CheckBox("AGB Akzeptieren*");
+        final CheckBox agbacceptBox = new CheckBox("AGB Akzeptieren*");
         
         
         

@@ -40,7 +40,7 @@ public class TopPanel extends HorizontalLayout{
         // Label bla = new Label("askjnfkasjf");
         // addComponent(bla);
        
-        VaadinSession session = UI.getCurrent().getSession();
+        final VaadinSession session = UI.getCurrent().getSession();
         User user = (User) session.getAttribute(Roles.CURRENT_USER);
         setWidth("100%");
         setMargin(true);
@@ -70,11 +70,14 @@ public class TopPanel extends HorizontalLayout{
         HorizontalLayout suchFeld = new HorizontalLayout();
         final TextField suchEingabe = new TextField();
         Button suche = new Button("Suchen", FontAwesome.SEARCH);
-        suche.addClickListener(e ->  {
+        suche.addClickListener(new Button.ClickListener() {
             //Aktion beim Suchebutton
             
          
-         if(suchEingabe.getValue().equals("")){
+          
+
+            public void buttonClick(Button.ClickEvent event) {
+                  if(suchEingabe.getValue().equals("")){
             Notification.show(null,"Bitte geben Sie ein Suchwort ein!", Notification.Type.WARNING_MESSAGE);
         }else{   
                 //Suchwort in Session speichern
@@ -82,7 +85,8 @@ public class TopPanel extends HorizontalLayout{
                 //SearchControl.suchausgabe(suchEingabe.getValue());    
                 //weiterleiten zu Suchview
                 UI.getCurrent().getNavigator().navigateTo("suche");
-                }   
+                }
+            }
         
             
         });
@@ -106,15 +110,23 @@ public class TopPanel extends HorizontalLayout{
         if(!status){
         // Button zur RegistrationView
         Button mainToRegView = new Button("Registrieren");
-        mainToRegView.addClickListener(e -> {
-            UI.getCurrent().getNavigator().navigateTo("registration");
+        mainToRegView.addClickListener(new Button.ClickListener() {
+           
+
+            public void buttonClick(Button.ClickEvent event) {
+                 UI.getCurrent().getNavigator().navigateTo("registration");
+            }
         });
       
         
         // Button zur LoginView
         Button mainToLogin = new Button("Login");
-        mainToLogin.addClickListener(e -> {
-            UI.getCurrent().getNavigator().navigateTo("login");
+        mainToLogin.addClickListener(new Button.ClickListener() {
+            
+
+            public void buttonClick(Button.ClickEvent event) {
+               UI.getCurrent().getNavigator().navigateTo("login");
+            }
         });
         
         
@@ -127,15 +139,23 @@ public class TopPanel extends HorizontalLayout{
         
         // Button zu ProfileView
         Button mainToProfile = new Button("Profile");
-        mainToProfile.addClickListener((Button.ClickEvent e )->{
-            UI.getCurrent().getNavigator().navigateTo("profile");
+        mainToProfile.addClickListener(new Button.ClickListener(){
+           
+
+            public void buttonClick(Button.ClickEvent event) {
+                 UI.getCurrent().getNavigator().navigateTo("profile");
+            }
         });
         
         
          // Button zum Logout
         Button logout = new Button("Logout");
-        logout.addClickListener(e -> {
-           LogoutControl.logout();
+        logout.addClickListener(new Button.ClickListener(){
+          
+
+            public void buttonClick(Button.ClickEvent event) {
+                 LogoutControl.logout();
+            }
             
              
         });

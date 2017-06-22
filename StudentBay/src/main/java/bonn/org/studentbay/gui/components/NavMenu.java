@@ -54,23 +54,38 @@ public class NavMenu extends HorizontalLayout{
         
         
         Button profileButton = new Button("Mein Profil");
-         profileButton.addClickListener((Button.ClickEvent e)->{
-            UI.getCurrent().getNavigator().navigateTo("profile");
+         profileButton.addClickListener(new Button.ClickListener(){
+          
+
+            public void buttonClick(Button.ClickEvent event) {
+                  UI.getCurrent().getNavigator().navigateTo("profile");
+            }
         });
          
           Button meinShopButton = new Button("Mein Shop");
-         meinShopButton.addClickListener((Button.ClickEvent e)->{
-            UI.getCurrent().getNavigator().navigateTo("meinshop");
+         meinShopButton.addClickListener(new Button.ClickListener(){
+            
+
+            public void buttonClick(Button.ClickEvent event) {
+                UI.getCurrent().getNavigator().navigateTo("meinshop");
+            }
         });
          
           Button addShopButton = new Button("Shop hinzufügen");
-         addShopButton.addClickListener((Button.ClickEvent e)->{
-            UI.getCurrent().getNavigator().navigateTo("addshop");
+         addShopButton.addClickListener(new Button.ClickListener(){
+            
+
+            public void buttonClick(Button.ClickEvent event) {
+                UI.getCurrent().getNavigator().navigateTo("addshop");
+            }
         });
          
             Button addArtikelButton = new Button("Artikel hinzufügen");
-         addArtikelButton.addClickListener((Button.ClickEvent e)->{
-            UI.getCurrent().getNavigator().navigateTo("addartikel");
+         addArtikelButton.addClickListener(new Button.ClickListener(){
+            public void buttonClick(Button.ClickEvent event) {
+               UI.getCurrent().getNavigator().navigateTo("addartikel");
+            }
+            
         });
         
         

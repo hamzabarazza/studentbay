@@ -62,7 +62,7 @@ public class SucheView extends VerticalLayout implements View{
         inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
       
         inhaltPanel.setContent(table);
-        inhaltPanel.setSizeFull();
+        
          inhaltPanel.setStyleName("content_block"); 
         
         

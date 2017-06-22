@@ -51,16 +51,16 @@ public class AddShopView extends VerticalLayout implements View{
         if(user.getLogged()){
             
                
-    TextField shopName = new TextField();
+    final TextField shopName = new TextField();
     shopName.setCaption("Shop Name");
     
     
-    CheckBox checkbox1 = new CheckBox("Vorkasse");
-    CheckBox checkbox2 = new CheckBox("Nachname");
-    CheckBox checkbox3 = new CheckBox("PayPal");
-    CheckBox checkbox4 = new CheckBox("Rechnung");
-    CheckBox checkbox5 = new CheckBox("Kreditkarte");
-    CheckBox checkbox6 = new CheckBox("Lastschrift");
+    final CheckBox checkbox1 = new CheckBox("Vorkasse");
+    final CheckBox checkbox2 = new CheckBox("Nachname");
+    final CheckBox checkbox3 = new CheckBox("PayPal");
+    final CheckBox checkbox4 = new CheckBox("Rechnung");
+    final CheckBox checkbox5 = new CheckBox("Kreditkarte");
+    final CheckBox checkbox6 = new CheckBox("Lastschrift");
     
     //checkbox2.setValue(true);
 

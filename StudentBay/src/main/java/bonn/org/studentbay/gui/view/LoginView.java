@@ -30,11 +30,11 @@ public class LoginView extends VerticalLayout implements View{
 public void setUp(){
     
     
-    TextField username = new TextField();
+    final TextField username = new TextField();
     username.setCaption("Benutzername");
     
     
-    PasswordField passwordField = new PasswordField();
+    final PasswordField passwordField = new PasswordField();
     passwordField.setCaption("Passwort");
     
     
