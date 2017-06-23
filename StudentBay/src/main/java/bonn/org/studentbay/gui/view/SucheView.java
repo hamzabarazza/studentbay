@@ -47,7 +47,7 @@ public class SucheView extends VerticalLayout implements View{
        table.setSizeFull();
        table.setSelectable(true);
        
-       List list;
+       List list = null;
         try {
             list = SearchControl.getInstance().getArtikelByName(suchText);
             data.removeAllItems();
@@ -57,9 +57,12 @@ public class SucheView extends VerticalLayout implements View{
         }
        
        
-       
-        inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
-      
+       if(list==null){
+          inhaltPanel.setCaption("Die Suche nach \"" + suchText + "\" ergab leider keine Teffer:");
+        }else{
+           inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
+        }
+        
         inhaltPanel.setContent(table);
         
          inhaltPanel.setStyleName("content_block"); 

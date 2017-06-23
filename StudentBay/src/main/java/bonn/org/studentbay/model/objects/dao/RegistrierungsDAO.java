@@ -49,7 +49,18 @@ public class RegistrierungsDAO {
         }
         
         // wenn er was findet, return = false | wenn er nichts findet return = true
-        return rs == null;
+       
+        Boolean ausgabe = true;
+        try {
+            while(rs.next()){
+                ausgabe = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrierungsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return ausgabe;
         
     }
     
@@ -69,7 +80,18 @@ public class RegistrierungsDAO {
         }
         
         // wenn er was findet, return = false | wenn er nichts findet return = true
-        return rs == null;
+        
+        Boolean ausgabe = true;
+        try {
+            while(rs.next()){
+                ausgabe = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrierungsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return ausgabe;
         
     }
     

@@ -124,8 +124,8 @@ public class RegistrationView extends VerticalLayout implements View {
             String password = passwordField.getValue();
             String passworderneut = passworderneutField.getValue();
             Boolean agb = agbacceptBox.getValue();
-            Boolean usernameCheck = false;
-            Boolean emailCheck = false;
+            Boolean usernameCheck;
+            Boolean emailCheck;
             
             // Regeln
             // Username Regel , username muss mindestens 5 Zeichen lang sein
@@ -163,7 +163,7 @@ public class RegistrationView extends VerticalLayout implements View {
             // Checke ob Username oder Email schon vergeben sind
             usernameCheck = RegistrierungsDAO.getInstance().checkUsernameExists(username);
             emailCheck = RegistrierungsDAO.getInstance().checkEmailExists(email);
-            
+            System.out.println("-------------------------------" + emailCheck);
             if (!emailCheck) {
                 Notification.show("Fehler","Email schon vergeben!",Notification.Type.ERROR_MESSAGE);
                 passwordField.setValue("");
