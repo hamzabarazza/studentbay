@@ -64,10 +64,8 @@ public class SucheView extends VerticalLayout implements View{
         }
         
        
-       HorizontalLayout tabelleninhalt = new HorizontalLayout();
-       tabelleninhalt.addComponent(table);
-       tabelleninhalt.setSizeFull();
-        inhaltPanel.setContent(tabelleninhalt);
+       
+        inhaltPanel.setContent(table);
         
          inhaltPanel.setStyleName("content_block"); 
         
