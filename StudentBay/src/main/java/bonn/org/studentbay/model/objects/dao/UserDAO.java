@@ -61,8 +61,6 @@ public class UserDAO{
             return null;
         }
         
-        
-        
         try {
             
             userID = rs.getInt(1);
@@ -81,7 +79,6 @@ public class UserDAO{
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         
         return userData;
         
@@ -112,6 +109,8 @@ public class UserDAO{
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
         return usernameReturn;
@@ -143,6 +142,8 @@ public class UserDAO{
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
         return vornameReturn;
@@ -174,6 +175,8 @@ public class UserDAO{
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
         return nachnameReturn;
@@ -205,6 +208,8 @@ public class UserDAO{
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
         return emailReturn;
@@ -241,6 +246,8 @@ public class UserDAO{
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
            
         return getVornameFromID(userID).equals(neuVorname);
@@ -259,6 +266,8 @@ public class UserDAO{
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
            
         return getNachnameFromID(userID).equals(neuNachname);
@@ -277,6 +286,8 @@ public class UserDAO{
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
            
         return getEmailFromID(userID).equals(neuEmail);
@@ -295,6 +306,8 @@ public class UserDAO{
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
     }

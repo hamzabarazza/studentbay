@@ -69,7 +69,7 @@ public class ArtikelDAO {
             Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
-        }
+        } 
         
         if (set == null) {
             return null;
@@ -81,6 +81,8 @@ public class ArtikelDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
         return artikelbezeichnungReturn;
@@ -99,6 +101,8 @@ public class ArtikelDAO {
             Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
            
         return getArtikelbezeichnungFromID(artikelID).equals(neuArtikelbezeichnung);
@@ -119,7 +123,7 @@ public class ArtikelDAO {
             Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
-        }
+        } 
         
         if (set == null) {
             return null;
@@ -131,6 +135,8 @@ public class ArtikelDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
         return artikelnameReturn;
@@ -149,6 +155,8 @@ public class ArtikelDAO {
             Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
            
         return getArtikelnameFromID(artikelID).equals(neuArtikelname);
@@ -168,6 +176,8 @@ public class ArtikelDAO {
             Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
     }

@@ -64,7 +64,9 @@ public class SearchDAO {
                 list.add(artikel);
             }
         } catch(SQLException ex){
-            
+            Logger.getLogger(SearchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
         return list;

@@ -49,6 +49,8 @@ public class ShopDAO {
             Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
         
       if(set.next()){
@@ -92,6 +94,8 @@ public class ShopDAO {
         }
         } catch(SQLException ex){
             
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
         }
           
      
@@ -116,6 +120,76 @@ public class ShopDAO {
             System.out.println("Fehler in der SQL-Anweisung! registerShop");
         }
         finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
+        
+    }
+    
+    public String getShopNameFromID(Integer shopID){
+        
+        String shopNameReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        
+        try{
+            set = statement.executeQuery("SELECT name FROM studentbay.shop WHERE studentbay.shop.shopid = \'" + shopID + "\'");
+        } catch (SQLException ex) {
+            Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            shopNameReturn = set.getString(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
+        
+        return shopNameReturn;
+        
+    }
+    
+    public boolean setShopNameFromID(Integer shopID, String neuShopName) throws SQLException{
+       
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("UPDATE studentbay.nutzer SET email = \'" + neuShopName + "\' WHERE userid = \'" + shopID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
+           
+        return getShopNameFromID(shopID).equals(neuShopName);
+        
+    }
+    
+    public void deleteShopWithID(Integer shopID){
+        
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("DELETE FROM studentbay.shop WHERE shopid = \'" + shopID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
             JDBCConnection.getInstance().closeConnection();
         }
         
