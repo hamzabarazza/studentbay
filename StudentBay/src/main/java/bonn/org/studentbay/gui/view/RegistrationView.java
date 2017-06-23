@@ -166,10 +166,14 @@ public class RegistrationView extends VerticalLayout implements View {
             
             if (!emailCheck) {
                 Notification.show("Fehler","Email schon vergeben!",Notification.Type.ERROR_MESSAGE);
+                passwordField.setValue("");
+                passworderneutField.setValue("");
             }
             
             if (!usernameCheck) {
                 Notification.show("Fehler","Username schon vergeben!",Notification.Type.ERROR_MESSAGE);
+                passwordField.setValue("");
+                passworderneutField.setValue("");
             }
             
             
