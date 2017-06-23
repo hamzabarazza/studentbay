@@ -57,8 +57,8 @@ public class SucheView extends VerticalLayout implements View{
         }
        
        
-       if(list==null){
-          inhaltPanel.setCaption("Die Suche nach \"" + suchText + "\" ergab leider keine Teffer:");
+       if(list.isEmpty()){
+          inhaltPanel.setCaption("Die Suche nach \"" + suchText + "\" ergab leider keine Teffer");
         }else{
            inhaltPanel.setCaption("Ihre Suche zu \"" + suchText + "\" ergab folgende Treffer:");
         }
