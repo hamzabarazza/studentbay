@@ -56,18 +56,21 @@ public class RegistrationView extends VerticalLayout implements View {
                 
         final DateField geburtstagField = new DateField();
         geburtstagField.setCaption("Geburtstag*");
+        geburtstagField.setStyleName("passwort");
         
         final TextField emailField = new TextField();
         emailField.setCaption("Email*");
         
         final PasswordField passwordField = new PasswordField();
         passwordField.setCaption("Passwort*");
+        passwordField.setStyleName("passwort");
         
         final PasswordField passworderneutField = new PasswordField();
         passworderneutField.setCaption("Passwort erneut eingeben*");
+        passworderneutField.setStyleName("passwort");
         
         final CheckBox agbacceptBox = new CheckBox("AGB Akzeptieren*");
-        
+        agbacceptBox.setStyleName("passwort");
         
         /*
         // Regestrierungs Kriterien
@@ -216,7 +219,7 @@ public class RegistrationView extends VerticalLayout implements View {
      addComponent(buttons);
      
     setComponentAlignment(buttons, Alignment.MIDDLE_CENTER);
-    
+    setMargin(true);
      
         
     }
