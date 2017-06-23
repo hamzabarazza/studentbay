@@ -21,11 +21,13 @@ public class User implements java.io.Serializable {
     private Date geburtstag;
     private String email;
     private String passwort;
+    private Integer fachbereichID;
     
     public User(){ 
     }
     
-    public User(String username ,String vorname, String nachname, Date geburtstag, String email, String passwort){ 
+    public User(Integer userID, String username ,String vorname, String nachname, Date geburtstag, String email, String passwort, Integer fachbereichID){ 
+        this.userID = userID;
         this.username= username;
         this.vorname = vorname;
         this.nachname = nachname;
@@ -33,6 +35,7 @@ public class User implements java.io.Serializable {
         this.email = email;
         this.passwort = passwort;
         this.geloggt = true;
+        this.fachbereichID = fachbereichID;
     }
     
     
@@ -54,13 +57,6 @@ public class User implements java.io.Serializable {
      public void setID(Integer id){
         this.userID = id;
     }
-    
-    /*
-    // userID sollte nicht überschrieben werden
-    public void setID(Integer neuUserID){
-        this.userID = neuUserID;
-    }
-    */
     
     public String getUsername(){
         return username;
@@ -108,6 +104,14 @@ public class User implements java.io.Serializable {
     
     public void setPasswort(String neuPasswort){
         this.passwort = neuPasswort;
+    }
+    
+    public Integer getFachbereichID(){
+        return this.fachbereichID;
+    }
+    
+    public void setFachbereichID(Integer neuFachbereichID){
+        this.fachbereichID = neuFachbereichID;
     }
     
 }

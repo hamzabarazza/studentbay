@@ -8,7 +8,6 @@ package bonn.org.studentbay.model.objects.dao;
 import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.services.db.JDBCConnection;
-import bonn.org.studentbay.services.util.Roles;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,7 +32,7 @@ public class UserDAO{
     private String userUsername = null;
     private Integer userFachbereichID = null;
     private Integer userShopID = null;
-    
+    private User userData = null;
     
     private UserDAO(){
         
@@ -46,16 +45,17 @@ public class UserDAO{
         return dao;
     }
     
-    public String getDataForUser( User user) throws SQLException{
+    public User getDataForUser(String username) throws SQLException{
         Statement statement = null;
         
         statement = JDBCConnection.getInstance().getStatement();
         ResultSet rs = null;
         
+        
         try{
-            rs = statement.executeQuery("SELECT * FROM studentbay.nutzer WHERE studentbay.nutzer.username = \'" + user.getUsername() + "\'");
+            rs = statement.executeQuery("SELECT * FROM studentbay.nutzer WHERE studentbay.nutzer.username = \'" + username + "\'");
         } catch (SQLException ex){
-            Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if (rs == null) {
@@ -75,7 +75,8 @@ public class UserDAO{
             userUsername = rs.getString(9);
             userFachbereichID = rs.getInt(11);
             userShopID = rs.getInt(12);
-            
+           
+            userData = new User(userID, userUsername , userVorname, userNachname, userGeburtstag, userEmail, userPassword,userFachbereichID);
            
             
         } catch (SQLException ex) {
@@ -83,9 +84,11 @@ public class UserDAO{
         }
         
         
-        return userVorname;
+        return userData;
         
         
     }    
+    
+    
     
 }

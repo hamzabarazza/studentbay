@@ -5,26 +5,27 @@
  */
 package bonn.org.studentbay.gui.view;
 
+import bonn.org.studentbay.model.objects.dao.RegistrierungsDAO;
+import bonn.org.studentbay.model.objects.dto.Fachbereich;
 import bonn.org.studentbay.process.control.RegistrationControl;
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.AbstractErrorMessage;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
-import static com.vaadin.ui.Notification.show;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -35,6 +36,14 @@ import java.util.regex.Pattern;
  */
 public class RegistrationView extends VerticalLayout implements View {
     public void setUp(){
+        
+        List<Fachbereich> fachbereiche = new ArrayList<>();
+        fachbereiche.add(new Fachbereich(1,"Wirtschaftswissenschaften"));
+        fachbereiche.add(new Fachbereich(2,"Informatik"));
+        fachbereiche.add(new Fachbereich(3,"EMT"));
+        fachbereiche.add(new Fachbereich(5,"Angewandte Naturwissenschaften"));
+        fachbereiche.add(new Fachbereich(6,"Sozialversicherung"));
+        
         
         final TextField usernameField = new TextField();
         usernameField.setCaption("Benutzername*");
@@ -58,7 +67,6 @@ public class RegistrationView extends VerticalLayout implements View {
         passworderneutField.setCaption("Passwort erneut eingeben*");
         
         final CheckBox agbacceptBox = new CheckBox("AGB Akzeptieren*");
-        
         
         
         /*
@@ -148,20 +156,33 @@ public class RegistrationView extends VerticalLayout implements View {
                 Notification.show("Fehler","Bitte AGB akzeptieren!", Notification.Type.ERROR_MESSAGE);
                 passwordField.setValue("");
                 passworderneutField.setValue("");
-                
             }
+            
+            // Checke ob Username oder Email schon vergeben sind
+            boolean usernameCheck = RegistrierungsDAO.getInstance().checkUsernameExists(username);
+            boolean emailCheck = RegistrierungsDAO.getInstance().checkEmailExists(email);
+            
+            if (!emailCheck) {
+                Notification.show("Fehler","Email schon vergeben!",Notification.Type.ERROR_MESSAGE);
+            }
+            
+            if (!usernameCheck) {
+                Notification.show("Fehler","Username schon vergeben!",Notification.Type.ERROR_MESSAGE);
+            }
+            
+            
             
             // Regestrierungs loschicken an DB
             try{
-                if (agb && password.equals(passworderneut) && password.length() > 5 && matchFound && username.length() > 5 && username.length() < 16){
+                if (agb && password.equals(passworderneut) && password.length() > 5 && matchFound && username.length() > 5 && username.length() < 16 && emailCheck && usernameCheck){
                     RegistrationControl.registerUser(username, vorname, nachname, geburtstag, email, password);
-                  }
-             } catch (RegisterFail ex) {   
+                }
+            } catch (RegisterFail ex) {   
                 Logger.getLogger(RegistrationView.class.getName()).log(Level.SEVERE, null, ex);
                 Notification.show("Fehler","Registrierung fehlgeschlagen", Notification.Type.ERROR_MESSAGE);
                 passwordField.setValue("");
                 passworderneutField.setValue("");
-             }   
+            }   
                
                         
             
