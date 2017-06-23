@@ -6,7 +6,6 @@
 package bonn.org.studentbay.model.objects.dao;
 
 import bonn.org.studentbay.model.objects.dto.User;
-import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.services.db.JDBCConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,15 +79,224 @@ public class UserDAO{
            
             
         } catch (SQLException ex) {
-            Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
         return userData;
         
-        
     }    
     
+    public String getUsernameFromID(Integer userID) throws SQLException{
+        
+        String usernameReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("SELECT username FROM studentbay.nutzer WHERE studentbay.nutzer.userid = \'" + userID+ "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            usernameReturn = set.getString(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return usernameReturn;
+        
+    }
     
+    public String getVornameFromID(Integer userID) throws SQLException{
+        
+        String vornameReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("SELECT vorname FROM studentbay.nutzer WHERE studentbay.nutzer.userid = \'" + userID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            vornameReturn = set.getString(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return vornameReturn;
+        
+    }
+    
+    public String getNachnameFromID(Integer userID) throws SQLException{
+        
+        String nachnameReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("SELECT nachname FROM studentbay.nutzer WHERE studentbay.nutzer.userid = \'" + userID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            nachnameReturn = set.getString(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return nachnameReturn;
+        
+    }
+    
+    public String getEmailFromID(Integer userID) throws SQLException{
+        
+        String emailReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("SELECT email FROM studentbay.nutzer WHERE studentbay.nutzer.userid = \'" + userID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            emailReturn = set.getString(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return emailReturn;
+        
+    }
+    
+    public boolean setUsernameFromID(Integer userID, String neuUsername) throws SQLException{
+       
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("UPDATE studentbay.nutzer SET username = \'" + neuUsername + "\' WHERE userid = \'" + userID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+           
+        return getUsernameFromID(userID).equals(neuUsername);
+        
+    }
+    
+    public boolean setVornameFromID(Integer userID, String neuVorname) throws SQLException{
+       
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("UPDATE studentbay.nutzer SET vorname = \'" + neuVorname + "\' WHERE userid = \'" + userID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+           
+        return getVornameFromID(userID).equals(neuVorname);
+        
+    }
+    
+    public boolean setNachnameFromID(Integer userID, String neuNachname) throws SQLException{
+       
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("UPDATE studentbay.nutzer SET nachname = \'" + neuNachname + "\' WHERE userid = \'" + userID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+           
+        return getNachnameFromID(userID).equals(neuNachname);
+        
+    }
+   
+    public boolean setEmailFromID(Integer userID, String neuEmail) throws SQLException{
+       
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("UPDATE studentbay.nutzer SET email = \'" + neuEmail + "\' WHERE userid = \'" + userID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+           
+        return getEmailFromID(userID).equals(neuEmail);
+        
+    }
+    
+    public void deleteUserWithID(Integer userID){
+        
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("DELETE FROM studentbay.nutzer WHERE userid = \'" + userID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+    }
     
 }

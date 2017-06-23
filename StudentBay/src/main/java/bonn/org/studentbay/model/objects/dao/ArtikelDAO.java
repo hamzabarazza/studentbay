@@ -5,7 +5,6 @@
  */
 package bonn.org.studentbay.model.objects.dao;
 
-import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
 import bonn.org.studentbay.services.db.JDBCConnection;
 import java.sql.ResultSet;
@@ -43,7 +42,7 @@ public class ArtikelDAO {
   
         } catch (SQLException ex) {
             
-            Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung! registerArtikel");
             
@@ -55,5 +54,122 @@ public class ArtikelDAO {
         }
         
     }
-
+    
+    public String getArtikelbezeichnungFromID(Integer artikelID) throws SQLException{
+        
+        String artikelbezeichnungReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+    
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("SELECT beschreibung FROM studentbay.artikel WHERE studentbay.artikel.artikelid = \'" + artikelID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            artikelbezeichnungReturn = set.getString(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return artikelbezeichnungReturn;
+        
+    }
+    
+    public boolean setArtikelbezeichnungFromID(Integer artikelID, String neuArtikelbezeichnung) throws SQLException{
+       
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("UPDATE studentbay.artikel SET bezeichnung = \'" + neuArtikelbezeichnung+ "\' WHERE userid = \'" + artikelID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+           
+        return getArtikelbezeichnungFromID(artikelID).equals(neuArtikelbezeichnung);
+        
+    }
+    
+    
+    public String getArtikelnameFromID(Integer artikelID) throws SQLException{
+        
+        String artikelnameReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("SELECT artikelname FROM studentbay.artikel WHERE studentbay.artikel.artikelid = \'" + artikelID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            artikelnameReturn = set.getString(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return artikelnameReturn;
+        
+    }
+    
+    public boolean setArtikelNameFromID(Integer artikelID, String neuArtikelname) throws SQLException{
+       
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("UPDATE studentbay.artikel SET artikelname = \'" + neuArtikelname + "\' WHERE userid = \'" + artikelID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+           
+        return getArtikelnameFromID(artikelID).equals(neuArtikelname);
+        
+    }
+    
+    
+    public void deleteArtikelWithID(Integer artikelID){
+        
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("DELETE FROM studentbay.artikel WHERE artikelid = \'" + artikelID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+    }
+    
 }

@@ -6,7 +6,6 @@
 package bonn.org.studentbay.model.objects.dao;
 
 import bonn.org.studentbay.model.objects.dto.User;
-import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.process.control.exceptions.NoSuchUserOrPassword;
 import bonn.org.studentbay.services.db.JDBCConnection;
 import bonn.org.studentbay.services.util.Roles;
@@ -50,7 +49,7 @@ public class LoginDAO {
                                         + " AND studentbay.nutzer.password = \'" + password + "\'");
             
         } catch (SQLException ex) {
-            Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
         }
@@ -83,7 +82,7 @@ public class LoginDAO {
             throw new NoSuchUserOrPassword();
         }
         } catch (SQLException ex){
-            Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             JDBCConnection.getInstance().closeConnection();
         }
