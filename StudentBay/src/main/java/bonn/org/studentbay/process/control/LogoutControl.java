@@ -6,7 +6,6 @@
 package bonn.org.studentbay.process.control;
 
 import com.vaadin.server.Page;
-import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 
