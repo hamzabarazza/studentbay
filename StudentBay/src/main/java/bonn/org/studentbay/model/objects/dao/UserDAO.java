@@ -216,6 +216,39 @@ public class UserDAO{
         
     }
     
+    public Integer getIDFromUsername(String username){
+        
+        Integer idReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("SELECT email FROM studentbay.nutzer WHERE studentbay.nutzer.username = \'" + username + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            idReturn = set.getInt(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
+        
+        return idReturn;
+        
+    }
+    
     public boolean setUsernameFromID(Integer userID, String neuUsername) throws SQLException{
        
         Statement statement = JDBCConnection.getInstance().getStatement();
@@ -291,6 +324,57 @@ public class UserDAO{
         }
            
         return getEmailFromID(userID).equals(neuEmail);
+        
+    }
+    
+    public boolean setPasswordFromID(Integer userID, String neuPassword) throws SQLException{
+       
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("UPDATE studentbay.nutzer SET password = \'" + neuPassword + "\' WHERE userid = \'" + userID + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
+           
+        return getEmailFromID(userID).equals(neuPassword);
+        
+    }
+    
+    public String getPasswordFromID(Integer userID) throws SQLException{
+        
+        String passwordReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try{
+            set = statement.executeQuery("SELECT password FROM studentbay.nutzer WHERE studentbay.nutzer.userid = \'" + userID + "\'");
+        } catch (SQLException ex){
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            passwordReturn = set.getString(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
+        
+        return passwordReturn;
+        
         
     }
     

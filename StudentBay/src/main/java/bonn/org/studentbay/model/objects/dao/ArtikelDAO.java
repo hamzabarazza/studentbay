@@ -55,6 +55,40 @@ public class ArtikelDAO {
         
     }
     
+    public Integer getArtikelIDFromArtikelname(String artikelname){
+        
+        Integer artikelIDReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("SELECT artikelid FROM studentbay.artikel WHERE studentbay.artikel.artikelname = \'" + artikelname + "\'");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        } 
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            artikelIDReturn = set.getInt(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArtikelDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
+        
+        return artikelIDReturn;
+        
+    }
+    
     public String getArtikelbezeichnungFromID(Integer artikelID) throws SQLException{
         
         String artikelbezeichnungReturn = null;

@@ -90,8 +90,7 @@ public class LoginDAO {
         VaadinSession session = UI.getCurrent().getSession();
         session.setAttribute(Roles.CURRENT_USER, user);
         
-        UI.getCurrent().getNavigator().navigateTo("main");
-       
+               
     }
     
 }

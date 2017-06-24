@@ -177,6 +177,38 @@ public class ShopDAO {
         
     }
     
+    public Integer getShopIDWithUserID(Integer userID){
+        
+        Integer shopIDReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        
+        try{
+            set = statement.executeQuery("SELECT shopid FROM studentbay.nutzer WHERE studentbay.nutzer.userid = \'" + userID + "\'");
+        } catch (SQLException ex) {
+            Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set == null) {
+            return null;
+        }
+        
+        try {
+           
+            shopIDReturn = set.getInt(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
+        
+        return shopIDReturn;
+        
+    }
+    
     public void deleteShopWithID(Integer shopID){
         
         Statement statement = JDBCConnection.getInstance().getStatement();
