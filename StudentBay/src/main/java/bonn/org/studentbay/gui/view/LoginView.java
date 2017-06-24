@@ -36,14 +36,16 @@ public void setUp(){
     
     final PasswordField passwordField = new PasswordField();
     passwordField.setCaption("Passwort");
-    
+    passwordField.setStyleName("passwort");
     
     VerticalLayout loginscreen = new VerticalLayout();
     loginscreen.addComponents(username, passwordField);
     
+    
     Panel login = new Panel("Bitte Loggen Sie sich hier ein:");
     this.addComponent(login);
     this.setComponentAlignment(login, Alignment.MIDDLE_CENTER);
+    this.setMargin(true);
     
     login.setContent(loginscreen);
     login.setSizeUndefined();
