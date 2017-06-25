@@ -6,11 +6,15 @@
 package bonn.org.studentbay.gui.view;
 
 import bonn.org.studentbay.gui.components.TopPanel;
+import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.process.control.exceptions.NoSuchUserOrPassword;
+import bonn.org.studentbay.services.util.Roles;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -21,6 +25,9 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,14 +61,41 @@ public void setUp(){
     loginButton.addClickListener(new Button.ClickListener(){
         
         @Override
-        public void buttonClick(Button.ClickEvent event){
+        public void buttonClick(Button.ClickEvent event) {
            
-            String login = username.getValue();
-            String password = passwordField.getValue();
             try {
                 
-                LoginControl.checkAuthenticaton(login, password);
+            String login = username.getValue();
+            String password = passwordField.getValue();
+                User user;
+                try {
+                    user = LoginControl.checkAuthenticaton(login, password);
+                     Notification notif = new Notification(
+                "Herzlich Willkommen " + user.getUsername() + "!",
+                "Der Login war erfolgreich",
+                Notification.TYPE_WARNING_MESSAGE);
+           
+           VaadinSession session = UI.getCurrent().getSession();
+           session.setAttribute(Roles.CURRENT_USER, user);
+
+            // Customize it
+            notif.setDelayMsec(3000);
+
+            // Show it in the page
+            notif.show(Page.getCurrent());
             
+            
+            
+        UI.getCurrent().getNavigator().navigateTo("main");
+        
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                 
+        
+        
+        
             }catch (NoSuchUserOrPassword ex){
                 // UI.getCurrent().getNavigator().navigateTo("login");
                 Notification.show("Fehler","Login oder Password falsch!", Notification.Type.ERROR_MESSAGE);

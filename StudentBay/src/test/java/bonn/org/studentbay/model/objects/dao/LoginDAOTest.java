@@ -5,8 +5,12 @@
  */
 package bonn.org.studentbay.model.objects.dao;
 
+import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
 import bonn.org.studentbay.services.util.Roles;
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.UI;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +32,7 @@ public class LoginDAOTest {
     private static String username = "thisisatest";
     private static String vorname = "gustavtest";
     private static String nachname = "hanspetertest";
-    private static Date geburtstag = null;
+    private static Date geburtstag = new Date(2324);
     private static String email = "hanspeter@gustavtest.com";
     private static String password = "hanspeter123";
     private static Integer userID = null;
@@ -38,7 +42,7 @@ public class LoginDAOTest {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws SQLException {
     
         try {
             RegistrierungsDAO.getInstance().registerUserDAO(username, vorname, nachname, geburtstag, email, password);
@@ -52,7 +56,7 @@ public class LoginDAOTest {
     @AfterClass
     public static void tearDownClass() {
     
-         UserDAO.getInstance().deleteUserWithID(userID);
+//         UserDAO.getInstance().deleteUserWithID(userID);
     
     }
     
@@ -86,9 +90,11 @@ public class LoginDAOTest {
         System.out.println("checkAuthenticatonDAO");
         String login = username;
         String passwordTest = password;
-        LoginDAO.checkAuthenticatonDAO(login, passwordTest);
+        User result = LoginDAO.checkAuthenticatonDAO(login, passwordTest);
+       
         // TODO review the generated test code and remove the default call to fail.
-        assertNotNull(Roles.CURRENT_USER);
+      
+        assertNotNull(result);
     }
     
 }

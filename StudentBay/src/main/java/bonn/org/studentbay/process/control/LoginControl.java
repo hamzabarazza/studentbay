@@ -6,8 +6,10 @@
 package bonn.org.studentbay.process.control;
 
 import bonn.org.studentbay.model.objects.dao.LoginDAO;
+import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.exceptions.NoSuchUserOrPassword;
 import com.vaadin.ui.UI;
+import java.sql.SQLException;
 
 /**
  *
@@ -16,11 +18,9 @@ import com.vaadin.ui.UI;
 public class LoginControl {
 
     
-    public static void checkAuthenticaton(String login, String password) throws NoSuchUserOrPassword{
-        
-        LoginDAO.getInstance().checkAuthenticatonDAO(login, password);
-        
-        UI.getCurrent().getNavigator().navigateTo("main");
+    public static User checkAuthenticaton(String login, String password) throws NoSuchUserOrPassword, SQLException{
+        User user = LoginDAO.getInstance().checkAuthenticatonDAO(login, password);
+        return user;
                
     }
 }

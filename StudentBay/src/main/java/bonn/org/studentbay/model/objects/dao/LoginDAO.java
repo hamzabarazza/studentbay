@@ -37,7 +37,7 @@ public class LoginDAO {
         return dao;
     }
 
-    public static void checkAuthenticatonDAO(String login, String password) throws NoSuchUserOrPassword{
+    public static User checkAuthenticatonDAO(String login, String password) throws NoSuchUserOrPassword, SQLException{
         
         // Datenbank-Zugriff
         
@@ -45,9 +45,9 @@ public class LoginDAO {
         ResultSet set = null;
         try {
             // SQL-Befehl
-            set = statement.executeQuery("SELECT * FROM studentbay.nutzer WHERE studentbay.nutzer.username = \'" + login + "\'"
-                                        + " AND studentbay.nutzer.password = \'" + password + "\'");
             
+            set = statement.executeQuery("SELECT * FROM studentbay.nutzer WHERE studentbay.nutzer.username = \'" + login + "\' AND studentbay.nutzer.password = \'" + password + "\'");
+             
         } catch (SQLException ex) {
             Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
@@ -56,7 +56,6 @@ public class LoginDAO {
         
         User user = new User();
         
-        try{
         
           if( set.next()){
             user.setID(set.getInt(1));
@@ -66,29 +65,15 @@ public class LoginDAO {
             user.setEmail(set.getString(4));
             user.setLogged(true);
 
-           Notification notif = new Notification(
-                "Herzlich Willkommen " + user.getUsername() + "!",
-                "Der Login war erfolgreich",
-                Notification.TYPE_WARNING_MESSAGE);
-
-            // Customize it
-            notif.setDelayMsec(3000);
-
-            // Show it in the page
-            notif.show(Page.getCurrent());
+         
            
         } else {
             // Fehlerfall
             throw new NoSuchUserOrPassword();
         }
-        } catch (SQLException ex){
-            Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            JDBCConnection.getInstance().closeConnection();
-        }
         
-        VaadinSession session = UI.getCurrent().getSession();
-        session.setAttribute(Roles.CURRENT_USER, user);
+        return user;
+       
         
                
     }

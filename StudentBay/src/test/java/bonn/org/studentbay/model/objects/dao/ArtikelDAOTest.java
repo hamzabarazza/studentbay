@@ -5,6 +5,7 @@
  */
 package bonn.org.studentbay.model.objects.dao;
 
+import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,6 +24,7 @@ import static org.junit.Assert.*;
 
 // *********** DER TEST SOLLTE FERTIG SEIN **********
 public class ArtikelDAOTest {
+    
     
     private static Integer userid = 1;
     private static String artikelname = "testRegisterArtikelDAO";
@@ -44,6 +46,9 @@ public class ArtikelDAOTest {
     
     
     public ArtikelDAOTest() {
+        
+               
+        
     }
     
     @BeforeClass

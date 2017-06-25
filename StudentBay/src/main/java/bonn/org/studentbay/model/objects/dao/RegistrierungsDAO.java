@@ -95,7 +95,7 @@ public class RegistrierungsDAO {
         
     }
     
-    public static void registerUserDAO(String username, String vorname, String nachname, Date geburtstag, String email, String password) throws RegisterFail{
+    public static void registerUserDAO(String username, String vorname, String nachname, Date geburtstag, String email, String password) throws RegisterFail, SQLException{
          
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;
@@ -104,12 +104,14 @@ public class RegistrierungsDAO {
             
             set = statement.executeQuery("INSERT INTO studentbay.nutzer (username,vorname,nachname,email,password,geburtsdatum) VALUES (\'" + username + "\', \'" + vorname + "\',\'" 
                     + nachname + "\',\'" + email + "\',\'" + password + "\', \'"+geburtstag+"\')");
-  
+
         } catch (SQLException ex) {
             Logger.getLogger(RegistrierungsDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
-            System.out.println("Fehler in der SQL-Anweisung! registerUser");
+            System.out.println("Fehler in der SQL-Anweisung! --registerUser");
         }
+        
+       
         finally {
             JDBCConnection.getInstance().closeConnection();
         }

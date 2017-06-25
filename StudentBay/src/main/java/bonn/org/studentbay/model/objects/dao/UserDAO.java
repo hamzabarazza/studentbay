@@ -216,14 +216,14 @@ public class UserDAO{
         
     }
     
-    public Integer getIDFromUsername(String username){
+    public static Integer getIDFromUsername(String username) throws SQLException{
         
         Integer idReturn = null;
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;
         try {
             // SQL-Befehl
-            set = statement.executeQuery("SELECT email FROM studentbay.nutzer WHERE studentbay.nutzer.username = \'" + username + "\'");
+            set = statement.executeQuery("SELECT userid FROM studentbay.nutzer WHERE studentbay.nutzer.username = \'" + username + "\'");
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -231,19 +231,10 @@ public class UserDAO{
             System.out.println("Fehler in der SQL-Anweisung!");
         }
         
-        if (set == null) {
-            return null;
+        if (set.next()) {
+            idReturn = set.getInt(1);
         }
         
-        try {
-           
-            idReturn = set.getInt(1);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            JDBCConnection.getInstance().closeConnection();
-        }
         
         return idReturn;
         
