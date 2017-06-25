@@ -7,6 +7,7 @@ package bonn.org.studentbay.model.objects.dao;
 
 import bonn.org.studentbay.model.objects.dto.Artikel;
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,19 +26,21 @@ import static org.junit.Assert.*;
 // *********** DER TEST SOLLTE FERTIG SEIN **********
 public class SearchDAOTest {
     
-    private static Integer userid= 9412463;
+    private static Integer userid= 1;
     private static String artikelname = "supertollartikel";
     private static String beschreibung = "supermegatollesBuch";
     private static String kategorie = "megatoll";
     private static Integer artikelID = null;
-    private static Artikel artikel = new Artikel(artikelID,artikelname,beschreibung, kategorie);
+    private static Artikel artikel = null ;
+   
+             
    
             
     public SearchDAOTest() {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws SQLException {
     
         try {
             ArtikelDAO.getInstance().registerArtikelDAO(userid,artikelname,beschreibung,kategorie);
@@ -46,13 +49,13 @@ public class SearchDAOTest {
         }
         
         artikelID = ArtikelDAO.getInstance().getArtikelIDFromArtikelname(artikelname);
-    
+        
     }
     
     @AfterClass
     public static void tearDownClass() {
     
-        ArtikelDAO.getInstance().deleteArtikelWithID(artikelID);
+//        ArtikelDAO.getInstance().deleteArtikelWithID(artikelID);
 
     
     }
@@ -85,11 +88,10 @@ public class SearchDAOTest {
     public void testGetArtikelByNameDAO() throws Exception {
         System.out.println("getArtikelByNameDAO");
         String name = artikelname;
-        List<Artikel> expResult = null;
-        expResult.add(artikel);
-        List<Artikel> result = SearchDAO.getArtikelByNameDAO(name);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+        List<Artikel> Result = SearchDAO.getArtikelByNameDAO(name);
+        Artikel result = Result.get(0);
+        assertEquals(artikelname,result.getArtikelname());
+       
     }
     
 }
