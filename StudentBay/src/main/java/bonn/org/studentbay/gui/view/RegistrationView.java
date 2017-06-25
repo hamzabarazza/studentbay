@@ -23,6 +23,7 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -127,8 +128,8 @@ public class RegistrationView extends VerticalLayout implements View {
             String password = passwordField.getValue();
             String passworderneut = passworderneutField.getValue();
             Boolean agb = agbacceptBox.getValue();
-            Boolean usernameCheck;
-            Boolean emailCheck;
+            Boolean usernameCheck = true;
+            Boolean emailCheck = true;
             
             // Regeln
             // Username Regel , username muss mindestens 5 Zeichen lang sein
@@ -163,10 +164,18 @@ public class RegistrationView extends VerticalLayout implements View {
                 passworderneutField.setValue("");
             }
             
-            // Checke ob Username oder Email schon vergeben sind
-            usernameCheck = RegistrierungsDAO.getInstance().checkUsernameExists(username);
-            emailCheck = RegistrierungsDAO.getInstance().checkEmailExists(email);
-            System.out.println("-------------------------------" + emailCheck);
+            try {
+                // Checke ob Username oder Email schon vergeben sind
+                usernameCheck = RegistrierungsDAO.getInstance().checkUsernameExists(username);
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistrationView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                emailCheck = RegistrierungsDAO.getInstance().checkEmailExists(email);
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistrationView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//            System.out.println("-------------------------------" + emailCheck);
             if (!emailCheck) {
                 Notification.show("Fehler","Email schon vergeben!",Notification.Type.ERROR_MESSAGE);
                 passwordField.setValue("");
@@ -184,7 +193,11 @@ public class RegistrationView extends VerticalLayout implements View {
             // Regestrierungs loschicken an DB
             try{
                 if (agb && password.equals(passworderneut) && password.length() > 5 && matchFound && username.length() > 5 && username.length() < 16 && emailCheck && usernameCheck){
-                    RegistrationControl.registerUser(username, vorname, nachname, geburtstag, email, password);
+                    try {
+                        RegistrationControl.registerUser(username, vorname, nachname, geburtstag, email, password);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(RegistrationView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             } catch (RegisterFail ex) {   
                 Logger.getLogger(RegistrationView.class.getName()).log(Level.SEVERE, null, ex);

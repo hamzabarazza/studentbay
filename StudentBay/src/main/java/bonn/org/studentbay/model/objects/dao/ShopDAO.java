@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -110,8 +111,8 @@ public class ShopDAO {
         ResultSet set = null;
         try {
 
-            set = statement.executeQuery("INSERT INTO studentbay.shop (erstelldatum, name, vorkasse, nachname, paypal, rechnung, kreditkarte, lastschrift) VALUES (\'24242\', \'" + shopname + "\', \'" + vorkasse + "\',\'" 
-                    + nachnahme + "\', \'" + paypal + "\', \'" + rechnung + "\', \'" + kreditkarte + "\', \'" + lastschrift + "\')");
+            set = statement.executeQuery("INSERT INTO studentbay.shop (erstelldatum, name, vorkasse, nachname, paypal, rechnung, kreditkarte, lastschrift) VALUES (\'2012-10-10\', \'" + shopname + "\', " + vorkasse + "," 
+                    + nachnahme + ", " + paypal + ", " + rechnung + ", " + kreditkarte + ", " + lastschrift + ")");
             
     
         } catch (SQLException ex) {
@@ -125,39 +126,30 @@ public class ShopDAO {
         
     }
     
-    public String getShopNameFromID(Integer shopID){
+    public static String getShopNameFromID(Integer shopID) throws SQLException{
         
         String shopNameReturn = null;
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;
         
         try{
-            set = statement.executeQuery("SELECT name FROM studentbay.shop WHERE studentbay.shop.shopid = \'" + shopID + "\'");
+            set = statement.executeQuery("SELECT name FROM studentbay.shop WHERE studentbay.shop.shopid = " + shopID);
         } catch (SQLException ex) {
             Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
         }
         
-        if (set == null) {
-            return null;
+        if (set.next()) {
+            shopNameReturn = set.getString(1);
         }
         
-        try {
-           
-            shopNameReturn = set.getString(1);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            JDBCConnection.getInstance().closeConnection();
-        }
         
         return shopNameReturn;
         
     }
     
-    public boolean setShopNameFromID(Integer shopID, String neuShopName) throws SQLException{
+    public static boolean setShopNameFromID(Integer shopID, String neuShopName) throws SQLException{
        
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;
@@ -177,39 +169,29 @@ public class ShopDAO {
         
     }
     
-    public Integer getShopIDWithUserID(Integer userID){
+    public static Integer getShopIDWithUserID(Integer userID) throws SQLException{
         
         Integer shopIDReturn = null;
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;
         
         try{
-            set = statement.executeQuery("SELECT shopid FROM studentbay.nutzer WHERE studentbay.nutzer.userid = \'" + userID + "\'");
+            set = statement.executeQuery("SELECT shopid FROM studentbay.nutzer WHERE studentbay.nutzer.userid = " + userID);
         } catch (SQLException ex) {
             Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
             System.out.println("Fehler in der SQL-Anweisung!");
         }
         
-        if (set == null) {
-            return null;
-        }
-        
-        try {
-           
-            shopIDReturn = set.getInt(1);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            JDBCConnection.getInstance().closeConnection();
+        if (set.next()) {
+             shopIDReturn = set.getInt(1);
         }
         
         return shopIDReturn;
         
     }
     
-    public void deleteShopWithID(Integer shopID){
+    public static void deleteShopWithID(Integer shopID){
         
         Statement statement = JDBCConnection.getInstance().getStatement();
         ResultSet set = null;

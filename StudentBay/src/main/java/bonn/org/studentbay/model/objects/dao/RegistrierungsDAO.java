@@ -33,7 +33,7 @@ public class RegistrierungsDAO {
         return dao;
     }
 
-    public boolean checkUsernameExists(String username){
+    public static boolean checkUsernameExists(String username) throws SQLException{
        Statement statement = null;
         
         statement = JDBCConnection.getInstance().getStatement();
@@ -51,20 +51,17 @@ public class RegistrierungsDAO {
         // wenn er was findet, return = false | wenn er nichts findet return = true
        
         Boolean ausgabe = true;
-        try {
-            while(rs.next()){
+        
+            if(rs.next()){
                 ausgabe = false;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistrierungsDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+      
         
         return ausgabe;
         
     }
     
-    public boolean checkEmailExists(String email){
+    public static boolean checkEmailExists(String email) throws SQLException{
        Statement statement = null;
         
         statement = JDBCConnection.getInstance().getStatement();
@@ -82,13 +79,10 @@ public class RegistrierungsDAO {
         // wenn er was findet, return = false | wenn er nichts findet return = true
         
         Boolean ausgabe = true;
-        try {
-            while(rs.next()){
+        
+            if(rs.next()){
                 ausgabe = false;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistrierungsDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         
         return ausgabe;

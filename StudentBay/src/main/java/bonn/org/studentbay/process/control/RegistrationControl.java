@@ -8,6 +8,7 @@ package bonn.org.studentbay.process.control;
 import bonn.org.studentbay.model.objects.dao.RegistrierungsDAO;
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
 import com.vaadin.ui.UI;
+import java.sql.SQLException;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ public class RegistrationControl{
     public RegistrationControl(){  
     }
     
-    public static void registerUser(String username, String vorname, String nachname, Date geburtstag, String email, String password) throws RegisterFail{
+    public static void registerUser(String username, String vorname, String nachname, Date geburtstag, String email, String password) throws RegisterFail, SQLException{
           
             RegistrierungsDAO.getInstance().registerUserDAO(username,vorname,nachname,geburtstag,email,password);
             

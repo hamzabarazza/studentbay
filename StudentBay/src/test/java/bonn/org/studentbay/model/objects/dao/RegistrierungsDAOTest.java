@@ -6,6 +6,7 @@
 package bonn.org.studentbay.model.objects.dao;
 
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,22 +29,24 @@ public class RegistrierungsDAOTest {
     private static String vorname = "peter";
     private static String nachname = "lustig";
     private static String email = "peter@lustig.com";
-    private static Date geburtstag = null;
+    private static Date geburtstag = new Date(2323);
     private static String password = "peter123456";
-    private static Integer userID = UserDAO.getInstance().getIDFromUsername(username);
+    private static Integer userID;
     
     public RegistrierungsDAOTest() {
     }
     
     @BeforeClass
-    public static void setUpClass() {
-   
+    public static void setUpClass() throws SQLException {
+         
         try {
             RegistrierungsDAO.getInstance().registerUserDAO(username,vorname,nachname,geburtstag,email,password);
         } catch (RegisterFail ex) {
             Logger.getLogger(RegistrierungsDAOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+        
+        userID = UserDAO.getInstance().getIDFromUsername(username); 
+        
     }
     
     @AfterClass
@@ -78,7 +81,7 @@ public class RegistrierungsDAOTest {
      * Test of checkUsernameExists method, of class RegistrierungsDAO.
      */
     @Test
-    public void testCheckUsernameExists() {
+    public void testCheckUsernameExists() throws SQLException {
         System.out.println("checkUsernameExists");
         String usernameFalse = "hans";
         String usernameTrue = "letsCheckIfThisUsernameExists";
@@ -96,13 +99,13 @@ public class RegistrierungsDAOTest {
      * Test of checkEmailExists method, of class RegistrierungsDAO.
      */
     @Test
-    public void testCheckEmailExists() {
+    public void testCheckEmailExists() throws SQLException {
         System.out.println("checkEmailExists");
         String emailFalse = "peter@lustig.com";
         String emailTrue = "checkIfthisEmailExists@what.com";
-        RegistrierungsDAO instance = null;
-        boolean resultTrue = instance.checkEmailExists(emailTrue);
-        boolean resultFalse = instance.checkEmailExists(emailFalse);
+       
+        boolean resultTrue = RegistrierungsDAO.checkEmailExists(emailTrue);
+        boolean resultFalse = RegistrierungsDAO.checkEmailExists(emailFalse);
         assertFalse(resultFalse);
         assertTrue(resultTrue);
         // TODO review the generated test code and remove the default call to fail.
@@ -117,7 +120,7 @@ public class RegistrierungsDAOTest {
         String usernameTest = "gustavo";
         String vornameTest = "gustavo";
         String nachnameTest = "frind";
-        Date geburtstagTest = null;
+        Date geburtstagTest = new Date(2323);
         String emailTest = "gustavo@fring.com";
         String passwordTest = "fring123456";
         String neuVorname = "neuVorname";
@@ -128,29 +131,29 @@ public class RegistrierungsDAOTest {
         RegistrierungsDAO.registerUserDAO(usernameTest, vornameTest, nachnameTest, geburtstagTest, emailTest, passwordTest);
         
         // READ
-        Integer userID = UserDAO.getInstance().getIDFromUsername(username);
+        Integer userID2 = UserDAO.getInstance().getIDFromUsername(usernameTest);
         
-        assertEquals(username, UserDAO.getInstance().getUsernameFromID(userID));
-        assertEquals(email, UserDAO.getInstance().getEmailFromID(userID));
-        assertEquals(vorname, UserDAO.getInstance().getVornameFromID(userID));
-        assertEquals(nachname, UserDAO.getInstance().getNachnameFromID(userID));
-        assertEquals(password, UserDAO.getInstance().getPasswordFromID(userID));
+        assertEquals(usernameTest, UserDAO.getInstance().getUsernameFromID(userID2));
+        assertEquals(emailTest, UserDAO.getInstance().getEmailFromID(userID2));
+        assertEquals(vornameTest, UserDAO.getInstance().getVornameFromID(userID2));
+        assertEquals(nachnameTest, UserDAO.getInstance().getNachnameFromID(userID2));
+        assertEquals(passwordTest, UserDAO.getInstance().getPasswordFromID(userID2));
         
         // UPDATE
-        UserDAO.getInstance().setVornameFromID(userID, neuVorname);
-        UserDAO.getInstance().setNachnameFromID(userID, neuNachname);
-        UserDAO.getInstance().setPasswordFromID(userID, neuPassword);
-        assertEquals(vorname, UserDAO.getInstance().getVornameFromID(userID));
-        assertEquals(nachname, UserDAO.getInstance().getNachnameFromID(userID));
-        assertEquals(password, UserDAO.getInstance().getPasswordFromID(userID));
+        UserDAO.getInstance().setVornameFromID(userID2, neuVorname);
+        UserDAO.getInstance().setNachnameFromID(userID2, neuNachname);
+        UserDAO.getInstance().setPasswordFromID(userID2, neuPassword);
+        assertEquals(neuVorname, UserDAO.getInstance().getVornameFromID(userID2));
+        assertEquals(neuNachname, UserDAO.getInstance().getNachnameFromID(userID2));
+        assertEquals(neuPassword, UserDAO.getInstance().getPasswordFromID(userID2));
 
         // DELETE
-        UserDAO.getInstance().deleteUserWithID(userID);
-        assertNull(UserDAO.getInstance().getVornameFromID(userID));
-        assertNull(UserDAO.getInstance().getNachnameFromID(userID));
-        assertNull(UserDAO.getInstance().getPasswordFromID(userID));
-        assertNull(UserDAO.getInstance().getEmailFromID(userID));
-        assertNull(UserDAO.getInstance().getUsernameFromID(userID));
+        UserDAO.getInstance().deleteUserWithID(userID2);
+        assertNull(UserDAO.getInstance().getVornameFromID(userID2));
+        assertNull(UserDAO.getInstance().getNachnameFromID(userID2));
+        assertNull(UserDAO.getInstance().getPasswordFromID(userID2));
+        assertNull(UserDAO.getInstance().getEmailFromID(userID2));
+        assertNull(UserDAO.getInstance().getUsernameFromID(userID2));
         
         
     }
