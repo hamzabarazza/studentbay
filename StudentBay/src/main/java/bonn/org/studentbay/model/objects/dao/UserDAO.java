@@ -33,7 +33,7 @@ public class UserDAO{
     private Integer userShopID = null;
     private User userData = null;
     
-    private UserDAO(){
+    UserDAO(){
         
     }
     
@@ -45,7 +45,7 @@ public class UserDAO{
     }
     
     public User getDataForUser(String username) throws SQLException{
-        Statement statement = null;
+        Statement statement;
         
         statement = JDBCConnection.getInstance().getStatement();
         ResultSet rs = null;
