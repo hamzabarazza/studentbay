@@ -53,9 +53,9 @@ public class SearchDAOTest {
     }
     
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass() throws SQLException {
     
-//        ArtikelDAO.getInstance().deleteArtikelWithID(artikelID);
+        ArtikelDAO.getInstance().deleteArtikelWithID(artikelID);
 
     
     }
