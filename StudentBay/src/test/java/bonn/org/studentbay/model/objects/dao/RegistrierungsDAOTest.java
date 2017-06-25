@@ -24,39 +24,42 @@ import static org.junit.Assert.*;
 // *********** DER TEST SOLLTE FERTIG SEIN **********
 public class RegistrierungsDAOTest {
     
-    private String username = "hans";
-    private String vorname = "peter";
-    private String nachname = "lustig";
-    private String email = "peter@lustig.com";
-    private Date geburtstag = null;
-    private String password = "peter123456";
-    private Integer userID = UserDAO.getInstance().getIDFromUsername(username);
+    private static String username = "hans";
+    private static String vorname = "peter";
+    private static String nachname = "lustig";
+    private static String email = "peter@lustig.com";
+    private static Date geburtstag = null;
+    private static String password = "peter123456";
+    private static Integer userID = UserDAO.getInstance().getIDFromUsername(username);
     
     public RegistrierungsDAOTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    
+   
         try {
             RegistrierungsDAO.getInstance().registerUserDAO(username,vorname,nachname,geburtstag,email,password);
         } catch (RegisterFail ex) {
             Logger.getLogger(RegistrierungsDAOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    
+        UserDAO.getInstance().deleteUserWithID(userID);
+    
+    }
+    
+    @Before
+    public void setUp() {
         
     }
     
     @After
     public void tearDown() {
-        UserDAO.getInstance().deleteUserWithID(userID);
         
     }
 

@@ -25,12 +25,12 @@ import static org.junit.Assert.*;
 // *********** DER TEST SOLLTE FERTIG SEIN **********
 public class SearchDAOTest {
     
-    private Integer userid= 9412463;
-    private String artikelname = "supertollartikel";
-    private String beschreibung = "supermegatollesBuch";
-    private String kategorie = "megatoll";
-    private Integer artikelID = null;
-    private Artikel artikel = new Artikel(artikelID,artikelname,beschreibung, kategorie);
+    private static Integer userid= 9412463;
+    private static String artikelname = "supertollartikel";
+    private static String beschreibung = "supermegatollesBuch";
+    private static String kategorie = "megatoll";
+    private static Integer artikelID = null;
+    private static Artikel artikel = new Artikel(artikelID,artikelname,beschreibung, kategorie);
    
             
     public SearchDAOTest() {
@@ -38,14 +38,6 @@ public class SearchDAOTest {
     
     @BeforeClass
     public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
     
         try {
             ArtikelDAO.getInstance().registerArtikelDAO(userid,artikelname,beschreibung,kategorie);
@@ -53,13 +45,25 @@ public class SearchDAOTest {
             Logger.getLogger(SearchDAOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        artikelID = ArtikelDAO.getInstance().getArtikelIDFromArtikelname(artikelname);        
+        artikelID = ArtikelDAO.getInstance().getArtikelIDFromArtikelname(artikelname);
+    
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    
+        ArtikelDAO.getInstance().deleteArtikelWithID(artikelID);
+
+    
+    }
+    
+    @Before
+    public void setUp() {
+    
     }
     
     @After
     public void tearDown() {
-    
-        ArtikelDAO.getInstance().deleteArtikelWithID(artikelID);
         
     }
 

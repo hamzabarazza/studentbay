@@ -25,13 +25,13 @@ import static org.junit.Assert.*;
 // *********** DER TEST SOLLTE FERTIG SEIN **********
 public class LoginDAOTest {
     
-    private String username = "thisisatest";
-    private String vorname = "gustavtest";
-    private String nachname = "hanspetertest";
-    private Date geburtstag = null;
-    private String email = "hanspeter@gustavtest.com";
-    private String password = "hanspeter123";
-    private Integer userID = null;
+    private static String username = "thisisatest";
+    private static String vorname = "gustavtest";
+    private static String nachname = "hanspetertest";
+    private static Date geburtstag = null;
+    private static String email = "hanspeter@gustavtest.com";
+    private static String password = "hanspeter123";
+    private static Integer userID = null;
     
     
     public LoginDAOTest() {
@@ -39,14 +39,6 @@ public class LoginDAOTest {
     
     @BeforeClass
     public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
     
         try {
             RegistrierungsDAO.getInstance().registerUserDAO(username, vorname, nachname, geburtstag, email, password);
@@ -57,10 +49,20 @@ public class LoginDAOTest {
         
     }
     
+    @AfterClass
+    public static void tearDownClass() {
+    
+         UserDAO.getInstance().deleteUserWithID(userID);
+    
+    }
+    
+    @Before
+    public void setUp() {
+        
+    }
+    
     @After
     public void tearDown() {
-    
-        UserDAO.getInstance().deleteUserWithID(userID);
         
     }
 
@@ -77,6 +79,7 @@ public class LoginDAOTest {
 
     /**
      * Test of checkAuthenticatonDAO method, of class LoginDAO.
+     * @throws java.lang.Exception
      */
     @Test
     public void testCheckAuthenticatonDAO() throws Exception {

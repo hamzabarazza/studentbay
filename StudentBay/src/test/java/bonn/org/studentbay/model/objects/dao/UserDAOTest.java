@@ -27,27 +27,19 @@ import static org.junit.Assert.*;
 // *********** DER TEST SOLLTE FERTIG SEIN **********
 public class UserDAOTest {
     
-    private String username = "thisistheUserDAOTest";
-    private String vorname = "itsjustATest";
-    private String nachname = "nothingtoWorryAbout";
-    private Date geburtstag = null;
-    private String email = "thisisjustaemail@test.com";
-    private String password = "passwordtest123";
-    private Integer userID = null;
+    private static String username = "thisistheUserDAOTest";
+    private static String vorname = "itsjustATest";
+    private static String nachname = "nothingtoWorryAbout";
+    private static Date geburtstag = null;
+    private static String email = "thisisjustaemail@test.com";
+    private static String password = "passwordtest123";
+    private static Integer userID = null;
     
     public UserDAOTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
     
         try {
             RegistrierungsDAO.getInstance().registerUserDAO(username, vorname, nachname, geburtstag, email, password);
@@ -58,8 +50,21 @@ public class UserDAOTest {
     
     }
     
+    @AfterClass
+    public static void tearDownClass() {
+    
+        UserDAO.getInstance().deleteUserWithID(userID);
+    
+    }
+    
+    @Before
+    public void setUp() {
+    
+    }
+    
     @After
     public void tearDown() {
+    
     }
 
     /**

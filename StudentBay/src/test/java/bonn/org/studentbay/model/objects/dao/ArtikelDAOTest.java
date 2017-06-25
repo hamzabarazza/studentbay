@@ -24,11 +24,11 @@ import static org.junit.Assert.*;
 // *********** DER TEST SOLLTE FERTIG SEIN **********
 public class ArtikelDAOTest {
     
-    private Integer userid = 999999999;
-    private String artikelname = "testRegisterArtikelDAO";
-    private String beschreibung = "this is just a test";
-    private String kategorie = "test";
-    private Integer artikelID = null;
+    private static Integer userid = 999999999;
+    private static String artikelname = "testRegisterArtikelDAO";
+    private static String beschreibung = "this is just a test";
+    private static String kategorie = "test";
+    private static Integer artikelID = null;
     
     
     public ArtikelDAOTest() {
@@ -37,30 +37,30 @@ public class ArtikelDAOTest {
     @BeforeClass
     public static void setUpClass() {
     
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-        
         try {
             ArtikelDAO.registerArtikelDAO(userid, artikelname, beschreibung, kategorie);
         } catch (RegisterFail ex) {
             Logger.getLogger(ArtikelDAOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         artikelID = ArtikelDAO.getInstance().getArtikelIDFromArtikelname(artikelname);
-
+        
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    
+        artikelID = ArtikelDAO.getInstance().getArtikelIDFromArtikelname(artikelname);
+        ArtikelDAO.getInstance().deleteArtikelWithID(userid);
+        
+    }
+    
+    @Before
+    public void setUp() {
 
     }
     
     @After
     public void tearDown() {
-    
-        artikelID = ArtikelDAO.getInstance().getArtikelIDFromArtikelname(artikelname);
-        ArtikelDAO.getInstance().deleteArtikelWithID(userid);
         
     }
 
