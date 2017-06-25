@@ -56,7 +56,7 @@ public class LoginDAOTest {
     @AfterClass
     public static void tearDownClass() {
     
-//         UserDAO.getInstance().deleteUserWithID(userID);
+         UserDAO.getInstance().deleteUserWithID(userID);
     
     }
     
