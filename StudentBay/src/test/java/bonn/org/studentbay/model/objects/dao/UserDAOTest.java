@@ -30,16 +30,34 @@ public class UserDAOTest {
     private static String username = "thisistheUserDAOTest";
     private static String vorname = "itsjustATest";
     private static String nachname = "nothingtoWorryAbout";
-    private static Date geburtstag = null;
+    private static Date geburtstag = new Date(232);
     private static String email = "thisisjustaemail@test.com";
     private static String password = "passwordtest123";
     private static Integer userID = null;
+    
+     private static String username2 = "thisistheUserDAOTest2";
+    private static String vorname2 = "itsjustATest2";
+    private static String nachname2 = "nothingtoWorryAbout2";
+    private static Date geburtstag2 = new Date(232);
+    private static String email2 = "thisisjustaemail@test.com2";
+    private static String password2 = "passwordtest12322";
+    private static Integer userID2 = null;
+    
+    
+    private static String username3 = "thisistheUserDAOTest3";
+    private static String vorname3 = "itsjustATest3";
+    private static String nachname3 = "nothingtoWorryAbout3";
+    private static Date geburtstag3 = new Date(232);
+    private static String email3 = "thisisjustaemail@test.com3";
+    private static String password3 = "passwordtest12333";
+    private static Integer userID3 = null;
+    
     
     public UserDAOTest() {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws SQLException {
     
         try {
             RegistrierungsDAO.getInstance().registerUserDAO(username, vorname, nachname, geburtstag, email, password);
@@ -47,14 +65,22 @@ public class UserDAOTest {
             Logger.getLogger(UserDAOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         userID = UserDAO.getInstance().getIDFromUsername(username);
-    
+        
+        
+        try {
+            RegistrierungsDAO.getInstance().registerUserDAO(username2, vorname2, nachname2, geburtstag2, email2, password2);
+        } catch (RegisterFail ex) {
+            Logger.getLogger(UserDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        userID2 = UserDAO.getInstance().getIDFromUsername(username2);
+  
     }
     
     @AfterClass
     public static void tearDownClass() {
     
         UserDAO.getInstance().deleteUserWithID(userID);
-    
+      UserDAO.getInstance().deleteUserWithID(userID2);
     }
     
     @Before
@@ -85,17 +111,16 @@ public class UserDAOTest {
     public void testGetDataForUser() throws Exception {
         System.out.println("getDataForUser");
         String usernameTest = username;
-        UserDAO instance = null;
-        User result = instance.getDataForUser(usernameTest);
+        User result = UserDAO.getDataForUser(usernameTest);
         assertNotNull(result);
         assertNotNull(result.getEmail());
         assertNotNull(result.getUsername());
         assertNotNull(result.getNachname());
         assertEquals(vorname, result.getVorname());
         assertEquals(password, result.getPasswort());
-        // TODO review the generated test code and remove the default call to fail.
+//         TODO review the generated test code and remove the default call to fail.
     }
-
+//
     /**
      * Test of getUsernameFromID method, of class UserDAO.
      */
@@ -103,9 +128,8 @@ public class UserDAOTest {
     public void testGetUsernameFromID() throws Exception {
         System.out.println("getUsernameFromID");
         Integer userIDTest = userID;
-        UserDAO instance = null;
         String expResult = username;
-        String result = instance.getUsernameFromID(userIDTest);
+        String result = UserDAO.getUsernameFromID(userIDTest);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -117,9 +141,8 @@ public class UserDAOTest {
     public void testGetVornameFromID() throws Exception {
         System.out.println("getVornameFromID");
         Integer userIDTest = userID;
-        UserDAO instance = null;
         String expResult = vorname;
-        String result = instance.getVornameFromID(userIDTest);
+        String result = UserDAO.getVornameFromID(userIDTest);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -131,9 +154,8 @@ public class UserDAOTest {
     public void testGetNachnameFromID() throws Exception {
         System.out.println("getNachnameFromID");
         Integer userIDTest = userID;
-        UserDAO instance = null;
         String expResult = nachname;
-        String result = instance.getNachnameFromID(userIDTest);
+        String result = UserDAO.getNachnameFromID(userIDTest);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -145,9 +167,8 @@ public class UserDAOTest {
     public void testGetEmailFromID() throws Exception {
         System.out.println("getEmailFromID");
         Integer userIDTest = userID;
-        UserDAO instance = null;
         String expResult = email;
-        String result = instance.getEmailFromID(userIDTest);
+        String result = UserDAO.getEmailFromID(userIDTest);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -156,12 +177,24 @@ public class UserDAOTest {
      * Test of getIDFromUsername method, of class UserDAO.
      */
     @Test
-    public void testGetIDFromUsername() {
+    public void testGetIDFromUsername() throws SQLException {
         System.out.println("getIDFromUsername");
         String usernameTest = username;
-        UserDAO instance = null;
         Integer expResult = userID;
-        Integer result = instance.getIDFromUsername(usernameTest);
+        Integer result = UserDAO.getIDFromUsername(usernameTest);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+        /**
+     * Test of getPasswordFromID method, of class UserDAO.
+     */
+    @Test
+    public void testGetPasswordFromID() throws Exception {
+        System.out.println("getPasswordFromID");
+        Integer userIDTest = userID;
+        String expResult = password;
+        String result = UserDAO.getPasswordFromID(userIDTest);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -172,10 +205,9 @@ public class UserDAOTest {
     @Test
     public void testSetUsernameFromID() throws Exception {
         System.out.println("setUsernameFromID");
-        Integer userIDTest = userID;
+        Integer userIDTest = userID2;
         String neuUsername = "usernameNeufürUserDAOTest";
-        UserDAO instance = null;
-        boolean result = instance.setUsernameFromID(userIDTest, neuUsername);
+        boolean result = UserDAO.setUsernameFromID(userIDTest, neuUsername);
         assertTrue(result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -186,10 +218,9 @@ public class UserDAOTest {
     @Test
     public void testSetVornameFromID() throws Exception {
         System.out.println("setVornameFromID");
-        Integer userIDTest = userID;
+        Integer userIDTest = userID2;
         String neuVorname = "neuVornameFürUserDAOTest";
-        UserDAO instance = null;
-        boolean result = instance.setVornameFromID(userIDTest, neuVorname);
+        boolean result = UserDAO.setVornameFromID(userIDTest, neuVorname);
         assertTrue(result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -200,10 +231,9 @@ public class UserDAOTest {
     @Test
     public void testSetNachnameFromID() throws Exception {
         System.out.println("setNachnameFromID");
-        Integer userIDTest = userID;
+        Integer userIDTest = userID2;
         String neuNachname = "neuNachnameFürUserDAOTest";
-        UserDAO instance = null;
-        boolean result = instance.setNachnameFromID(userIDTest, neuNachname);
+        boolean result = UserDAO.setNachnameFromID(userIDTest, neuNachname);
         assertTrue(result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -216,8 +246,7 @@ public class UserDAOTest {
         System.out.println("setEmailFromID");
         Integer userIDTest = userID;
         String neuEmail = "emailTest@UserDAO.com";
-        UserDAO instance = null;
-        boolean result = instance.setEmailFromID(userIDTest, neuEmail);
+        boolean result = UserDAO.setEmailFromID(userIDTest, neuEmail);
         assertTrue(result);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -228,46 +257,26 @@ public class UserDAOTest {
     @Test
     public void testSetPasswordFromID() throws Exception {
         System.out.println("setPasswordFromID");
-        Integer userIDTest = userID;
+        Integer userIDTest = userID2;
         String neuPassword = "superneuespasswordfürDAOTest";
-        UserDAO instance = null;
-        boolean result = instance.setPasswordFromID(userIDTest, neuPassword);
+        boolean result = UserDAO.setPasswordFromID(userIDTest, neuPassword);
         assertTrue(result);
         // TODO review the generated test code and remove the default call to fail.
     }
 
-    /**
-     * Test of getPasswordFromID method, of class UserDAO.
-     */
-    @Test
-    public void testGetPasswordFromID() throws Exception {
-        System.out.println("getPasswordFromID");
-        Integer userIDTest = userID;
-        UserDAO instance = null;
-        String expResult = password;
-        String result = instance.getPasswordFromID(userIDTest);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
 
     /**
      * Test of deleteUserWithID method, of class UserDAO.
      */
     @Test
-    public void testDeleteUserWithID() {
+    public void testDeleteUserWithID() throws SQLException {
         System.out.println("deleteUserWithID");
-        Integer userIDTest = userID;
-        UserDAO instance = null;
-        instance.deleteUserWithID(userIDTest);
+        Integer userIDTest = userID3;
+        UserDAO.deleteUserWithID(userIDTest);
         // TODO review the generated test code and remove the default call to fail.
-        try {
             assertNull(UserDAO.getInstance().getVornameFromID(userIDTest));
             assertNull(UserDAO.getInstance().getEmailFromID(userIDTest));        
             assertNull(UserDAO.getInstance().getNachnameFromID(userIDTest));
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAOTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
 }

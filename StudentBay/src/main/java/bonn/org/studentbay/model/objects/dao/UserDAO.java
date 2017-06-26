@@ -22,16 +22,16 @@ public class UserDAO{
 
     private static UserDAO dao = null;
    
-    private Integer userID = null;
-    private String userVorname = null;
-    private String userNachname = null;
-    private Date userGeburtstag = null;
-    private String userEmail = null;
-    private String userPassword = null;
-    private String userUsername = null;
-    private Integer userFachbereichID = null;
-    private Integer userShopID = null;
-    private User userData = null;
+    private static Integer userID = null;
+    private static String userVorname = null;
+    private static String userNachname = null;
+    private static Date userGeburtstag = null;
+    private static String userEmail = null;
+    private static String userPassword = null;
+    private static String userUsername = null;
+    private static Integer userFachbereichID = null;
+    private static Integer userShopID = null;
+    private static User userData = null;
     
     UserDAO(){
         
@@ -44,7 +44,7 @@ public class UserDAO{
         return dao;
     }
     
-    public User getDataForUser(String username) throws SQLException{
+    public static User getDataForUser(String username) throws SQLException{
         Statement statement;
         
         statement = JDBCConnection.getInstance().getStatement();
@@ -57,28 +57,22 @@ public class UserDAO{
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if (rs == null) {
-            return null;
-        }
-        
-        try {
-            
-            userID = rs.getInt(1);
+        if (rs.next()) {
+             userID = rs.getInt(1);
             userVorname = rs.getString(2);
             userNachname = rs.getString(3);
-            userGeburtstag = rs.getDate(10);
-            userEmail = rs.getString(3);
-            userPassword = rs.getString(4);
-            userUsername = rs.getString(9);
-            userFachbereichID = rs.getInt(11);
-            userShopID = rs.getInt(12);
+            userGeburtstag = rs.getDate(11);
+            userEmail = rs.getString(4);
+            userPassword = rs.getString(5);
+            userUsername = rs.getString(10);
+            userFachbereichID = rs.getInt(12);
+            userShopID = rs.getInt(13);
            
             userData = new User(userID, userUsername , userVorname, userNachname, userGeburtstag, userEmail, userPassword,userFachbereichID);
            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         
         return userData;
         
@@ -298,7 +292,7 @@ public class UserDAO{
             JDBCConnection.getInstance().closeConnection();
         }
            
-        return getEmailFromID(userID).equals(neuPassword);
+        return getPasswordFromID(userID).equals(neuPassword);
         
     }
     
