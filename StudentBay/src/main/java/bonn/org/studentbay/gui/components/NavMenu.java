@@ -102,6 +102,19 @@ public class NavMenu extends HorizontalLayout{
         content.addComponent(addArtikelButton);
         }
         
+          
+        Button videoButton = new Button("Zum Video");
+         videoButton.addClickListener(new Button.ClickListener(){
+          
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                  UI.getCurrent().getNavigator().navigateTo("video");
+            }
+        });
+         
+         
+        content.addComponent(videoButton);
       
         newsfeed.setContent(content);
         

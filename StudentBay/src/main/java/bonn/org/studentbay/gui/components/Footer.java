@@ -19,8 +19,8 @@ public class Footer extends HorizontalLayout{
     public Footer(){
         setWidth("100%");
          HorizontalLayout footer = new HorizontalLayout();
-        Label kontakt = new Label("Kontakt");
-        Label impressum = new Label("Impressum");
+        Label kontakt = new Label("Kontakt -");
+        Label impressum = new Label("- Impressum");
         footer.setWidth("100%");
         HorizontalLayout footerPanel = new HorizontalLayout();
         footer.addComponent(footerPanel);
