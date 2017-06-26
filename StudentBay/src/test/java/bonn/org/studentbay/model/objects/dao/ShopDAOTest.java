@@ -25,15 +25,35 @@ import static org.junit.Assert.*;
  */
 public class ShopDAOTest {
     
-    private static final Integer userID =1;
-    private static final String shopname = "superTollerNameFürDenShopDAOTest";
-    private static final Boolean vorkasse = false;
-    private static final Boolean nachnahme = false;
-    private static final Boolean paypal = true;
-    private static final Boolean rechnung = false;
-    private static final Boolean kreditkarte = true;
-    private static final Boolean lastschrift = true;
+    private static  Integer userID;
+    private static  String shopname = "superTollerNameFürDenShopDAOTest";
+    private static  Boolean vorkasse = false;
+    private static  Boolean nachnahme = false;
+    private static  Boolean paypal = true;
+    private static  Boolean rechnung = false;
+    private static  Boolean kreditkarte = true;
+    private static  Boolean lastschrift = true;
     private static Integer shopID;
+    
+      private static  Integer userID2;
+    private static  String shopname2 = "superTollerNameFürDenShopDAOTest2";
+    private static  Boolean vorkasse2 = false;
+    private static  Boolean nachnahme2 = false;
+    private static  Boolean paypal2 = true;
+    private static  Boolean rechnung2 = false;
+    private static  Boolean kreditkarte2 = true;
+    private static  Boolean lastschrift2 = true;
+    private static Integer shopID2;
+    
+      private static  Integer userID3;
+    private static  String shopname3 = "superTollerNameFürDenShopDAOTest3";
+    private static  Boolean vorkasse3 = false;
+    private static  Boolean nachnahme3 = false;
+    private static  Boolean paypal3 = true;
+    private static  Boolean rechnung3 = false;
+    private static  Boolean kreditkarte3 = true;
+    private static  Boolean lastschrift3 = true;
+    private static Integer shopID3;
     
     
     public ShopDAOTest() {
@@ -42,8 +62,8 @@ public class ShopDAOTest {
     @BeforeClass
     public static void setUpClass() throws SQLException, RegisterFail {
         
-//        RegistrierungsDAO.registerUserDAO("username", "vorname", "nachname", new Date(2122), "email", "password");
-        
+        RegistrierungsDAO.registerUserDAO("username", "vorname", "nachname", new Date(2122), "email", "password");
+        userID = UserDAO.getIDFromUsername("username");
         
         
         try {
@@ -51,16 +71,55 @@ public class ShopDAOTest {
         } catch (RegisterFail ex) {
             Logger.getLogger(ShopDAOTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-        shopID = ShopDAO.getInstance().getShopIDWithUserID(userID);
+        
+        shopID = ShopDAO.getInstance().getShopIDbyName(shopname);
+      
+        ShopDAO.setMeinShopDAO(userID, shopID);
+        
+        
+        
+        
+          RegistrierungsDAO.registerUserDAO("username2", "vorname2", "nachname2", new Date(2122), "email2", "password2");
+        userID2 = UserDAO.getIDFromUsername("username2");
+        
+        
+        try {
+            ShopDAO.getInstance().registerShopDAO(userID2, shopname2, vorkasse2, nachnahme2, paypal2, rechnung2, kreditkarte2, lastschrift2);
+        } catch (RegisterFail ex) {
+            Logger.getLogger(ShopDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        shopID2 = ShopDAO.getInstance().getShopIDbyName(shopname2);
+      
+        ShopDAO.setMeinShopDAO(userID2, shopID2);
+        
+        
+        
+          RegistrierungsDAO.registerUserDAO("username3", "vorname3", "nachname3", new Date(2122), "email3", "password3");
+        userID3 = UserDAO.getIDFromUsername("username3");
+        
+        
+        try {
+            ShopDAO.getInstance().registerShopDAO(userID3, shopname3, vorkasse3, nachnahme3, paypal3, rechnung3, kreditkarte3, lastschrift3);
+        } catch (RegisterFail ex) {
+            Logger.getLogger(ShopDAOTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        shopID3 = ShopDAO.getInstance().getShopIDbyName(shopname3);
+      
+        ShopDAO.setMeinShopDAO(userID3, shopID3);
+        
         
     }
     
     @AfterClass
     public static void tearDownClass() {
-    
-//        ShopDAO.getInstance().deleteShopWithID(shopID);
-//           UserDAO.deleteUserWithID(userID);
+        UserDAO.deleteUserWithID(userID);
+        ShopDAO.getInstance().deleteShopWithID(shopID);
+        
+        UserDAO.deleteUserWithID(userID2);
+        ShopDAO.getInstance().deleteShopWithID(shopID2);
+        
     }
     
     @Before
@@ -84,53 +143,34 @@ public class ShopDAOTest {
         // TODO review the generated test code and remove the default call to fail.
     }
 
-//    /**
-//     * Test of getMeinShopDAO method, of class ShopDAO.
-//     */
-//    @Test
-//    public void testGetMeinShopDAO() throws Exception {
-//        System.out.println("getMeinShopDAO");
-//        Integer user = null;
-//        String expResult = "";
-//        String result = ShopDAO.getMeinShopDAO(user);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//    }
-//
-//    /**
-//     * Test of getArtikelShopDAO method, of class ShopDAO.
-//     */
-//    @Test
-//    public void testGetArtikelShopDAO() {
-//        System.out.println("getArtikelShopDAO");
-//        Integer userID = null;
-//        List<Artikel> expResult = null;
-//        List<Artikel> result = ShopDAO.getArtikelShopDAO(userID);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//    }
-//
-//    /**
-//     * Test of registerShopDAO method, of class ShopDAO.
-//     */
-//    @Test
-//    public void testRegisterShopDAO() throws Exception {
-//        System.out.println("registerShopDAO");
-//        Integer userIDTest = 4536747;
-//        String shopnameTest = "anotherOneShopNameTest";
-//        Boolean vorkasseTest = false;
-//        Boolean nachnahmeTest = false;
-//        Boolean paypalTest = false;
-//        Boolean rechnungTest = false;
-//        Boolean kreditkarteTest = false;
-//        Boolean lastschriftTest = false;
-//        ShopDAO.registerShopDAO(userID, shopname, vorkasseTest, nachnahme, paypal, rechnung, kreditkarte, lastschrift);
-//        // TODO review the generated test code and remove the default call to fail.
-//        assertEquals(shopname, ShopDAO.getInstance().getShopNameFromID(shopID));
-//        assertNotNull(ShopDAO.getInstance().getShopNameFromID(shopID));
-//        
-//    }
-//
+    /**
+     * Test of getMeinShopDAO method, of class ShopDAO.
+     */
+    @Test
+    public void testGetMeinShopDAO() throws Exception {
+        System.out.println("getMeinShopDAO");
+        Integer user = userID;
+        String expResult = "superTollerNameFürDenShopDAOTest";
+        String result = ShopDAO.getMeinShopDAO(user);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of getArtikelShopDAO method, of class ShopDAO.
+     */
+    @Test
+    public void testGetArtikelShopDAO() {
+        System.out.println("getArtikelShopDAO");
+        List<Artikel> expResult = null;
+        List<Artikel> Result = ShopDAO.getArtikelShopDAO(userID);
+        
+        Artikel result = null;
+        assertNull(result);
+        
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
     /**
      * Test of getShopNameFromID method, of class ShopDAO.
      */
@@ -143,34 +183,33 @@ public class ShopDAOTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
-//
-//    /**
-//     * Test of setShopNameFromID method, of class ShopDAO.
-//     */
-//    @Test
-//    public void testSetShopNameFromID() throws Exception {
-//        System.out.println("setShopNameFromID");
-//        Integer shopIDTest = shopID;
-//        String neuShopName = "neuerMegaGuterShopName";
-//        ShopDAO instance = null;
-//        boolean result = instance.setShopNameFromID(shopID, neuShopName);
-//        assertTrue(result);
-//        // TODO review the generated test code and remove the default call to fail.
-//    }
-//
-//    /**
-//     * Test of deleteShopWithID method, of class ShopDAO.
-//     */
-//    @Test
-//    public void testDeleteShopWithID() {
-//        System.out.println("deleteShopWithID");
-//        Integer shopIDTest = shopID;
-//        ShopDAO instance = null;
-//        instance.deleteShopWithID(shopID);
-//        // TODO review the generated test code and remove the default call to fail.
-//        assertNull(ShopDAO.getInstance().getShopNameFromID(shopIDTest));
-//    }
-//
+
+    /**
+     * Test of setShopNameFromID method, of class ShopDAO.
+     */
+    @Test
+    public void testSetShopNameFromID() throws Exception {
+        System.out.println("setShopNameFromID");
+        String neuShopName = "neuerMegaGuterShopName";
+        boolean result = ShopDAO.setShopNameFromID(shopID2, neuShopName);
+        assertTrue(result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of deleteShopWithID method, of class ShopDAO.
+     */
+    @Test
+    public void testDeleteShopWithID() throws SQLException {
+        System.out.println("deleteShopWithID");
+        UserDAO.deleteUserWithID(userID3);
+        Integer shopIDTest = shopID3;
+        ShopDAO instance = null;
+        instance.deleteShopWithID(shopID3);
+        // TODO review the generated test code and remove the default call to fail.
+        assertNull(ShopDAO.getInstance().getShopNameFromID(shopIDTest));
+    }
+
     /**
      * Test of getShopIDWithUserID method, of class ShopDAO.
      */
@@ -183,5 +222,5 @@ public class ShopDAOTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
-//    
+    
 }

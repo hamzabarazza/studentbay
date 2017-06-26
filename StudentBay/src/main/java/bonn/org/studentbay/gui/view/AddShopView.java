@@ -8,6 +8,7 @@ package bonn.org.studentbay.gui.view;
 import bonn.org.studentbay.gui.components.Footer;
 import bonn.org.studentbay.gui.components.NavMenu;
 import bonn.org.studentbay.gui.components.TopPanel;
+import bonn.org.studentbay.model.objects.dao.ShopDAO;
 import bonn.org.studentbay.model.objects.dto.User;
 import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.process.control.MeinShopControl;
@@ -79,6 +80,11 @@ public class AddShopView extends VerticalLayout implements View{
                                         public void buttonClick(Button.ClickEvent event){
                                             try {
                                                 ShopControl.registerShop(user.getID(),shopName.getValue(),checkbox1.getValue(),checkbox2.getValue(),checkbox3.getValue(),checkbox4.getValue(),checkbox5.getValue(),checkbox6.getValue());
+                                                try {
+                                                    ShopDAO.setMeinShopDAO(user.getID(),ShopDAO.getShopIDbyName(shopName.getValue()) );
+                                                } catch (SQLException ex) {
+                                                    Logger.getLogger(AddShopView.class.getName()).log(Level.SEVERE, null, ex);
+                                                }
                                             } catch (RegisterFail ex) {
                                                 Logger.getLogger(AddShopView.class.getName()).log(Level.SEVERE, null, ex);
                                             }

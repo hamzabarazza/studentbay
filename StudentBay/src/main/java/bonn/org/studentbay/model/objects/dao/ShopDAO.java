@@ -5,6 +5,7 @@
  */
 package bonn.org.studentbay.model.objects.dao;
 
+import static bonn.org.studentbay.model.objects.dao.UserDAO.getPasswordFromID;
 import bonn.org.studentbay.model.objects.dto.Artikel;
 import bonn.org.studentbay.process.control.LoginControl;
 import bonn.org.studentbay.process.control.exceptions.RegisterFail;
@@ -59,10 +60,49 @@ public class ShopDAO {
       }else{
           return "";
       }
+         
+    }
+    
+      public static void setMeinShopDAO(Integer userID, Integer shopID) throws SQLException {
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        try {
+            // SQL-Befehl
+            set = statement.executeQuery("UPDATE studentbay.nutzer SET shopid = " + shopID + " WHERE userid = " + userID);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        } finally {
+            JDBCConnection.getInstance().closeConnection();
+        }
            
         
-          
-     
+      }
+      
+      
+    public static Integer getShopIDbyName(String shopName) throws SQLException{
+        
+        Integer shopidReturn = null;
+        Statement statement = JDBCConnection.getInstance().getStatement();
+        ResultSet set = null;
+        
+        try{
+            set = statement.executeQuery("SELECT shopid FROM studentbay.shop WHERE studentbay.shop.name = \'" + shopName + "\'");
+        } catch (SQLException ex) {
+            Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
+            // Fehler bei SQL
+            System.out.println("Fehler in der SQL-Anweisung!");
+        }
+        
+        if (set.next()) {
+            shopidReturn = Integer.parseInt(set.getString(1));
+        }
+        
+        
+        return shopidReturn;
+        
     }
     public static List<Artikel> getArtikelShopDAO(Integer userID){
         
@@ -155,7 +195,7 @@ public class ShopDAO {
         ResultSet set = null;
         try {
             // SQL-Befehl
-            set = statement.executeQuery("UPDATE studentbay.nutzer SET email = \'" + neuShopName + "\' WHERE userid = \'" + shopID + "\'");
+            set = statement.executeQuery("UPDATE studentbay.shop SET name = \'" + neuShopName + "\' WHERE shopid = " + shopID);
             
         } catch (SQLException ex) {
             Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -176,7 +216,7 @@ public class ShopDAO {
         ResultSet set = null;
         
         try{
-            set = statement.executeQuery("SELECT shopid FROM studentbay.nutzer WHERE studentbay.nutzer.userid = " + userID);
+            set = statement.executeQuery("SELECT * FROM studentbay.nutzer WHERE studentbay.nutzer.userid = " + userID);
         } catch (SQLException ex) {
             Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
             // Fehler bei SQL
@@ -184,7 +224,7 @@ public class ShopDAO {
         }
         
         if (set.next()) {
-             shopIDReturn = set.getInt(1);
+             shopIDReturn = set.getInt(13);
         }
         
         return shopIDReturn;
@@ -197,7 +237,7 @@ public class ShopDAO {
         ResultSet set = null;
         try {
             // SQL-Befehl
-            set = statement.executeQuery("DELETE FROM studentbay.shop WHERE shopid = \'" + shopID + "\'");
+            set = statement.executeQuery("DELETE FROM studentbay.shop WHERE shopid = " + shopID);
             
         } catch (SQLException ex) {
             Logger.getLogger(ShopDAO.class.getName()).log(Level.SEVERE, null, ex);
